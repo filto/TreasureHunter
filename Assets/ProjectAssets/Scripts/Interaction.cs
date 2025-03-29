@@ -26,7 +26,7 @@ public class Interaction : MonoBehaviour
         {
             case TouchPhase.Began:
                // Debug.Log("Nu börjar jag");
-                touchStartPosition = new Vector3 (touchData.position.x, touchData.position.y, interactionObject.transform.position.z);
+               touchStartPosition = touchData.position;
                 startPosition = interactionObject.transform.position;
                 break;
 
@@ -34,14 +34,14 @@ public class Interaction : MonoBehaviour
                 //Debug.Log("Nu drar jag");
                 if (isDraggable)
                 {
-                interactionObject.transform.position =new Vector3 (touchData.position.x, touchData.position.y, interactionObject.transform.position.z) + midPointOffset;
+                interactionObject.transform.position =touchData.position + midPointOffset;
                 }
                 
                 break;
 
             case TouchPhase.Ended:
                 //Debug.Log("Nu slutar jag");
-                Vector3 touchEndPosition = new Vector3 (touchData.position.x, touchData.position.y, interactionObject.transform.position.z);
+                Vector3 touchEndPosition = touchData.position;
                 float dragDistance = Vector3.Distance(touchStartPosition, touchEndPosition);
                 
                 if (dragDistance <= clickThreshold)

@@ -8,7 +8,7 @@ public class InteractionManager : MonoBehaviour
     private bool isUIObject = false;
     private GameObject activeObject = null;
     private GameObject droppedObject = null;
-    private Collider2D activeObjectCollider;
+    private Collider activeObjectCollider;
     
     private void Awake()
     {
@@ -26,27 +26,50 @@ public class InteractionManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            Vector3 UITouchPosition = uiCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
-            Vector3 baseTouchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
-            Collider2D UIHit = Physics2D.OverlapPoint(UITouchPosition);
-            Collider2D baseHit = Physics2D.OverlapPoint(baseTouchPosition);
-            GameObject UIHitObject = UIHit ? UIHit.gameObject : null;
-            GameObject baseHitObject = baseHit ? baseHit.gameObject : null;
-            Vector3 touchPosition=baseTouchPosition;
+            Ray uiRay = uiCamera.ScreenPointToRay(touch.position);
+            Ray worldRay = Camera.main.ScreenPointToRay(touch.position);
+
+            RaycastHit hitUI;
+            RaycastHit hitBase;
+
+            GameObject UIHitObject = null;
+            GameObject baseHitObject = null;
+
+            Collider UIHitCollider = null;
+            Collider baseHitCollider = null;
+
+            Vector3 UITouchPosition = Vector3.zero;
+            Vector3 baseTouchPosition = Vector3.zero;
+
+            if (Physics.Raycast(uiRay, out hitUI,100f))
+            {
+                UIHitObject = hitUI.collider.gameObject;
+                UIHitCollider = hitUI.collider;
+                UITouchPosition = hitUI.point;
+            }
+
+            if (Physics.Raycast(worldRay, out hitBase, 100f))
+            {
+                baseHitObject  = hitBase.collider.gameObject;
+                baseHitCollider = hitBase.collider;
+                baseTouchPosition = hitBase.point;
+            }
+
+            Vector3 touchPosition = baseTouchPosition;
             
             switch (touch.phase)
             {
                 case TouchPhase.Began:
                     
                     activeObject = baseHitObject;
-                    activeObjectCollider = baseHit;
+                    activeObjectCollider = baseHitCollider;
                     
                     if (UIHitObject != null && UIHitObject.CompareTag("UI"))
                     {
                         isUIObject = true;
                         activeObject = UIHitObject;
                         touchPosition = UITouchPosition;
-                        activeObjectCollider = UIHit;
+                        activeObjectCollider = UIHitCollider;
                     }
                     
                     activeObjectCollider.enabled = false;
@@ -55,6 +78,8 @@ public class InteractionManager : MonoBehaviour
                     {
                         activeObject.SendMessage("OnTouchEvent", new TouchData(touch.phase, touchPosition, null), SendMessageOptions.DontRequireReceiver);
                     }
+                    
+                    Debug.Log("Began: " + activeObject.name + " at " + touchPosition);
                     
                     break;
 
@@ -69,6 +94,8 @@ public class InteractionManager : MonoBehaviour
                     {
                         activeObject.SendMessage("OnTouchEvent", new TouchData(touch.phase, touchPosition, null), SendMessageOptions.DontRequireReceiver);
                     }
+                    
+                    Debug.Log("Moved hit: " + activeObject.name + " at " + touchPosition);
                     
                     break;
 
