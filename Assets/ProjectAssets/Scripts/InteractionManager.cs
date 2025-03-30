@@ -8,6 +8,7 @@ public class InteractionManager : MonoBehaviour
     private GameObject activeObject = null;
     private GameObject droppedObject = null;
     private Collider activeObjectCollider;
+    private bool touchStartedOverUI = false;
     
     private void Awake()
     {
@@ -20,13 +21,6 @@ public class InteractionManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            
-            if (UIWrappers.IsPointerOverUI(touch.position))
-            {
-                Debug.Log("Touch på UI – ignorerar världen");
-                return;
-            }
-
             
             Ray worldRay = Camera.main.ScreenPointToRay(touch.position);
             RaycastHit hitRay;
@@ -45,6 +39,13 @@ public class InteractionManager : MonoBehaviour
             {
                 case TouchPhase.Began:
                     
+                    touchStartedOverUI = UIWrappers.IsPointerOverUI(touch.position);
+                    if (touchStartedOverUI)
+                    {
+                        // Den här touchen tillhör UI – InteractionManager ska inte göra nåt alls
+                        return;
+                    }
+                    
                     activeObject = hitObject;
                     activeObjectCollider = hitCollider;
                     
@@ -60,6 +61,8 @@ public class InteractionManager : MonoBehaviour
                     break;
 
                 case TouchPhase.Moved:
+
+                    if (touchStartedOverUI) return;
                     
                     if (activeObject != null)
                     {
@@ -72,8 +75,9 @@ public class InteractionManager : MonoBehaviour
 
                 case TouchPhase.Ended:
                     
-                    droppedObject = hitObject;
+                    if (touchStartedOverUI) return;
                     
+                    droppedObject = hitObject;
                     activeObjectCollider.enabled = true;
                     
                     if (activeObject != null)

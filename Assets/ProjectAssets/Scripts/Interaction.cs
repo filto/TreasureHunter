@@ -51,7 +51,7 @@ public class Interaction : MonoBehaviour
                 
                 float dragDistance = Vector3.Distance(touchStartPosition, touchEndPosition);
                 
-                //Debug.Log(" " + dragDistance + " " + touchStartPosition + "End:" + touchEndPosition);
+                Debug.Log(" " + dragDistance + " " + touchStartPosition + "End:" + touchEndPosition);
                 
                 if (dragDistance <= clickThreshold)
                 {

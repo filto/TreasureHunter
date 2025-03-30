@@ -7,13 +7,13 @@ public class NodePlacer : MonoBehaviour
 
      [Header("Tag för noder")]
     public string nodeTag = "Node";  // Tag för att identifiera noder
-    public Interaction interaction;
+    public UIDraggableReset dragScript;
 
     private void OnEnable()
     {
-        if (interaction != null)
+        if (dragScript != null)
         {
-            interaction.OnDragEnd += HandleEndDrag; // ✅ Börja lyssna på OnDragEnd
+            dragScript.OnDragEnd += HandleEndDrag; // ✅ Börja lyssna på OnDragEnd
         }
     }
      
@@ -26,7 +26,6 @@ public class NodePlacer : MonoBehaviour
     
     void HandleEndDrag(Vector3 touchPosition, GameObject hitObject, Vector3 startPosition, GameObject dragObject)
     {
-        dragObject.transform.position = startPosition; //Återställ knappens originalPosition;
         
         if (hitObject ==  GameManager.Instance.trashCan)
         {
