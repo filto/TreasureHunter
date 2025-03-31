@@ -8,6 +8,7 @@ TagManager:
   - Background
   - UI
   - Map
+  - TrashCan
   layers:
   - Default
   - TransparentFX
