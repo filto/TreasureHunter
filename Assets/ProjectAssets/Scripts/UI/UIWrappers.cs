@@ -19,4 +19,25 @@ public static class UIWrappers
 
         return results.Count > 0;
     }
+    
+    public static bool DroppedOnTrashCan(Vector2 screenPosition)
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (var result in results)
+        {
+            if (result.gameObject.CompareTag("TrashCan"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

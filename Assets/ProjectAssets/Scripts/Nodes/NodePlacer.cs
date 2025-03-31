@@ -7,7 +7,7 @@ public class NodePlacer : MonoBehaviour
 
      [Header("Tag för noder")]
     public string nodeTag = "Node";  // Tag för att identifiera noder
-    public UIDraggableReset dragScript;
+    public InteractionUI dragScript;
 
     private void OnEnable()
     {

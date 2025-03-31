@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 
-public class UIDraggableReset : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InteractionUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public event Action<Vector3, GameObject, Vector3, GameObject> OnDragEnd;
     

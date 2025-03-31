@@ -50,11 +50,12 @@ public class Node : MonoBehaviour
     
     void HandleEndDrag(Vector3 touchPosition, GameObject hitObject, Vector3 startPosition, GameObject dragObject)
     {
-        if (hitObject == GameManager.Instance.trashCan)
+        
+        if (UIWrappers.DroppedOnTrashCan(touchPosition))
         {
-            //Debug.Log("🗑️ Nod släppt på Trashcan, tar bort den.");
-            DeleteNode(touchPosition); 
-            return;  // ⛔ AVSLUTA HÄR! Vi behöver inte kolla något mer.
+            Debug.Log("💥 Släppt på papperskorgen!");
+            Destroy(gameObject); // eller annan delete
+            return;
         }
         
         MoveNode(touchPosition);  
