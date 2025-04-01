@@ -48,13 +48,21 @@ public class Node : MonoBehaviour
         spriteRenderer.color = currentNodeData.color;   // Ändra färg
     }
     
-    void HandleEndDrag(Vector3 touchPosition, GameObject hitObject, Vector3 startPosition, GameObject dragObject)
+    void HandleEndDrag(Vector3 touchPosition, TouchData touchData, Vector3 startPosition, GameObject dragObject)
     {
         
-        if (UIWrappers.DroppedOnTrashCan(touchPosition))
+        if (UIWrappers.DroppedOnTrashCan(touchData.screenPosition))
         {
             Debug.Log("💥 Släppt på papperskorgen!");
+            DeleteNode(touchData.worldPosition);
             Destroy(gameObject); // eller annan delete
+            return;
+        }
+        
+        if (UIWrappers.IsPointerOverUI(touchData.screenPosition))
+        {
+            Debug.Log("Japp på UI)");
+            dragObject.transform.position = startPosition;
             return;
         }
         

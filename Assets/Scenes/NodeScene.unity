@@ -1411,7 +1411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 990131329}
   - component: {fileID: 990131328}
-  - component: {fileID: 990131331}
   - component: {fileID: 990131332}
   m_Layer: 0
   m_Name: BG
@@ -1490,19 +1489,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -270}
---- !u!114 &990131331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990131327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33cf9fd048633d549a332502965454e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 330585545}
 --- !u!65 &990131332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1901,7 +1887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1470304212
 Transform:
   m_ObjectHideFlags: 0

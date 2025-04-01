@@ -4,13 +4,15 @@ using UnityEngine;
 public class TouchData
 {
     public TouchPhase phase;
-    public Vector3 position;
-    public GameObject droppedObject;
+    public Vector3 worldPosition;
+    public Vector3 screenPosition;
+    public GameObject hitObject;
 
-    public TouchData(TouchPhase phase, Vector3 position, GameObject droppedObject)
+    public TouchData(TouchPhase phase, Vector3 worldPosition, Vector3 screenPosition, GameObject hitObject)
     {
         this.phase = phase;
-        this.position = position;
-        this.droppedObject = droppedObject;
+        this.worldPosition = worldPosition;
+        this.screenPosition = screenPosition;
+        this.hitObject = hitObject;
     }
 }

@@ -17,13 +17,13 @@ public class CameraPan : MonoBehaviour
         {
             case TouchPhase.Began:
                 // Debug.Log("Nu börjar jag");
-                touchStartPosition = new Vector3 (touchData.position.x, touchData.position.y, cam.transform.position.z);
+                touchStartPosition = new Vector3 (touchData.worldPosition.x, touchData.worldPosition.y, cam.transform.position.z);
                 break;
 
             case TouchPhase.Moved:
                 //Debug.Log("Nu drar jag");
                 Vector3 delta = touchStartPosition -
-                                new Vector3(touchData.position.x, touchData.position.y, cam.transform.position.z);  
+                                new Vector3(touchData.worldPosition.x, touchData.worldPosition.y, cam.transform.position.z);  
                 cam.transform.position += new Vector3(delta.x, delta.y, 0);
                 break;
 

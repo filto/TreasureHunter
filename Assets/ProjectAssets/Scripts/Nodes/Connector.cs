@@ -31,11 +31,11 @@ public class Connector : MonoBehaviour
         }
     }
     
-    void HandleEndDrag(Vector3 touchPosition, GameObject hitObject, Vector3 startPosition, GameObject dragObject)
+    void HandleEndDrag(Vector3 touchPosition, TouchData touchdata, Vector3 startPosition, GameObject dragObject)
     {
         dragObject.transform.position = startPosition; //Återställ originalPosition;
         
-        if (hitObject == GameManager.Instance.trashCan)
+        /*if (hitObject == GameManager.Instance.trashCan)
         {
             Debug.Log("🗑️ Connector släppt på Trashcan, tar bort den.");
             var nodes = NodeManager.Instance.GetNodesFromConnection(gameObject);
@@ -43,7 +43,7 @@ public class Connector : MonoBehaviour
             NodeManager.Instance.RemoveConnection(fromNode,toNode);
             NodeManager.Instance.AddConnection(toNode, fromNode, true);
             return;  // ⛔ AVSLUTA HÄR! Vi behöver inte kolla något mer.
-        }
+        }*/
     }
 
     void HandleClick(GameObject dragObject)

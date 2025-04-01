@@ -3,7 +3,7 @@ using System; // För Action (delegates)
 
 public class Interaction : MonoBehaviour
 {
-    public event Action<Vector3, GameObject, Vector3, GameObject> OnDragEnd; // 🔥 Bara för detta objekt
+    public event Action<Vector3, TouchData, Vector3, GameObject> OnDragEnd; // 🔥 Bara för detta objekt
     public event Action<GameObject> OnClick;
     public Vector3 midPointOffset;
     private Vector3 startPosition; // Store start position
@@ -12,6 +12,7 @@ public class Interaction : MonoBehaviour
     private Vector3 touchStartPosition;
     private Vector3 touchEndPosition;
     public bool isDraggable = true;
+    private bool wasClickedInBeganPhase=false;
     public bool is2DMovement= false;
     private Vector3 worldPosition;
     private Camera uiCamera;
@@ -26,48 +27,62 @@ public class Interaction : MonoBehaviour
         {
             case TouchPhase.Began:
                //Debug.Log("Nu börjar jag");
+               if (UIWrappers.IsPointerOverUI(touchData.screenPosition))
+               {
+                   Debug.Log("Japp på UI)");
+                   return;
+               }
                
-                touchStartPosition = touchData.position;
+                touchStartPosition = touchData.worldPosition;
                 startPosition = interactionObject.transform.position;
+                wasClickedInBeganPhase = true;
                 break;
 
             case TouchPhase.Moved:
                 //Debug.Log("Nu drar jag");
+                if (!wasClickedInBeganPhase) return;
                 
                 if (isDraggable)
-                {
-                interactionObject.transform.position =touchData.position + midPointOffset;
+                { 
+                    if (is2DMovement)
+                    interactionObject.transform.position = new Vector3(touchData.worldPosition.x, touchData.worldPosition.y, interactionObject.transform.position.z) + midPointOffset;
+                    else
+                    interactionObject.transform.position = touchData.worldPosition + midPointOffset;
                 }
                 
                 break;
 
-            case TouchPhase.Ended:
+            case TouchPhase.Ended: 
+            case TouchPhase.Canceled:
                 //Debug.Log("Nu slutar jag");
-                
-                if (is2DMovement)
-                    touchEndPosition = new Vector3(touchData.position.x, touchData.position.y, interactionObject.transform.position.z);
-                else
-                    touchEndPosition = touchData.position;
-                
-                float dragDistance = Vector3.Distance(touchStartPosition, touchEndPosition);
-                
-                //Debug.Log(" " + dragDistance + " " + touchStartPosition + "End:" + touchEndPosition);
-                
-                if (dragDistance <= clickThreshold)
-                {
-                    //Debug.Log("Nu klickar jag");
-                    
-                    OnClick?.Invoke(gameObject);
-                    interactionObject.transform.position = startPosition;
-                    return;
-                }
 
-                if (isDraggable)
+                if (wasClickedInBeganPhase)
                 {
-                    
-                    OnDragEnd?.Invoke(touchEndPosition, touchData.droppedObject, startPosition, interactionObject);
-                }
+                    if (is2DMovement)
+                        touchEndPosition = new Vector3(touchData.worldPosition.x, touchData.worldPosition.y, interactionObject.transform.position.z);
+                    else
+                        touchEndPosition = touchData.worldPosition;
 
+                    float dragDistance = Vector3.Distance(touchStartPosition, touchEndPosition);
+
+                    //Debug.Log(" " + dragDistance + " " + touchStartPosition + "End:" + touchEndPosition);
+
+                    if (dragDistance <= clickThreshold)
+                    {
+                        //Debug.Log("Nu klickar jag");
+
+                        OnClick?.Invoke(gameObject);
+                        interactionObject.transform.position = startPosition;
+                        return;
+                    }
+
+                    if (isDraggable)
+                    {
+
+                        OnDragEnd?.Invoke(touchEndPosition, touchData, startPosition, interactionObject);
+                    }
+                }
+                wasClickedInBeganPhase = false;
                 break;
         }
     }
