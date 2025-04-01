@@ -24,17 +24,17 @@ public class NodePlacer : MonoBehaviour
     }
     
     
-    void HandleEndDrag(Vector3 touchPosition, GameObject hitObject, Vector3 startPosition, GameObject dragObject)
+    void HandleEndDrag(TouchData touchData, Vector3 startPosition, GameObject dragObject)
     {
         
-        if (hitObject ==  GameManager.Instance.trashCan)
+        if (UIWrappers.IsPointerOverUI(touchData.screenPosition, dragObject))
         {
-            return;  // ⛔ AVSLUTA HÄR! Vi behöver inte kolla något mer.
+            Debug.Log("Japp på UI)");
+            dragObject.transform.position = startPosition;
+            return;
         }
         
-        PlaceNode(touchPosition); // Placera noden på gridpositionen 
-        
-
+        PlaceNode(touchData.worldPosition); // Placera noden på gridpositionen 
     }
     
 }
