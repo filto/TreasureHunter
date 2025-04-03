@@ -14,6 +14,8 @@ public class CameraPanner : MonoBehaviour
     private Vector3 inertia = Vector3.zero;
     public float inertiaDamp = 0.9f;  // 0.9 → långsam broms, 0.5 → snabbare
     public float inertiaThreshold = 0.01f; // under detta → stopp
+    public float minZoom = 2f;
+    public float maxZoom = 20f;
         
 
     void Update()
@@ -57,12 +59,6 @@ public class CameraPanner : MonoBehaviour
                 cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - zoomDelta, 2f, 20f);
             }
         }
-
-        float scroll = Input.mouseScrollDelta.y;
-        if (scroll != 0f)
-        {
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - scroll * scrollZoomSpeed, 2f, 20f);
-        }
         
         if (Input.touchCount == 0 && inertia.magnitude > inertiaThreshold)
         {
@@ -76,6 +72,17 @@ public class CameraPanner : MonoBehaviour
 
             // Debug
             Debug.Log($"Inertia: {inertia}");
+        }
+        
+        float scroll = Input.mouseScrollDelta.y;
+        if (scroll != 0f)
+        {
+            Debug.Log($"Scroll input: {scroll}");
+            cam.orthographicSize = Mathf.Clamp(
+                cam.orthographicSize - scroll * scrollZoomSpeed,
+                minZoom,
+                maxZoom
+            );
         }
     }
     
