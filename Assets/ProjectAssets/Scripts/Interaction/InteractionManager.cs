@@ -36,7 +36,8 @@ public class InteractionManager : MonoBehaviour
                 phase: touch.phase,
                 worldPosition: worldPosition,
                 screenPosition: touch.position,
-                hitObject: hitObject
+                hitObject: hitObject,
+                touchCount:Input.touchCount
             );
             
             if (touchData.phase == TouchPhase.Began)

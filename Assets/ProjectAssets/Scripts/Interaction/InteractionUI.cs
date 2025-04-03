@@ -58,7 +58,8 @@ public class InteractionUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             phase: phase,
             worldPosition: worldPos,
             screenPosition: eventData.position,
-            hitObject: hitObject
+            hitObject: hitObject,
+            touchCount:Input.touchCount
         );
     }
 }
