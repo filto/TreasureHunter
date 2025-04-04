@@ -16,12 +16,17 @@ public class CameraPanner : MonoBehaviour
     public float inertiaThreshold = 0.01f; // under detta → stopp
     public float minZoom = 2f;
     public float maxZoom = 20f;
+    
+    private float doubleClickTime = 0.25f; // Max tid mellan klick för att räknas som dubbelklick
+    private float lastClickTime = -1f;
+    private bool zoomMode = false;
+    private Vector2 lastMousePos;
         
 
     void Update()
     {
         
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 && !zoomMode)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -37,7 +42,7 @@ public class CameraPanner : MonoBehaviour
                 Vector3 delta = worldA - worldB;
                 transform.position += new Vector3(delta.x * speedX, 0f, delta.z * speedZ);
 
-                Debug.Log($"Delta: {delta}, Pos: {transform.position}");
+                //Debug.Log($"Delta: {delta}, Pos: {transform.position}");
                 
                 inertia = delta / Time.deltaTime;
 
@@ -71,19 +76,47 @@ public class CameraPanner : MonoBehaviour
             inertia *= inertiaDamp; // bromsa in
 
             // Debug
-            Debug.Log($"Inertia: {inertia}");
+            //Debug.Log($"Inertia: {inertia}");
         }
         
-        float scroll = Input.mouseScrollDelta.y;
-        if (scroll != 0f)
+        
+        #region EditorZoom       
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log($"Scroll input: {scroll}");
+            float timeSinceLastClick = Time.time - lastClickTime;
+
+            if (timeSinceLastClick <= doubleClickTime)
+            {
+                zoomMode = true;
+                Debug.Log("🔍 Zoom mode activated");
+            }
+
+            lastClickTime = Time.time;
+            lastMousePos = Input.mousePosition;
+        }
+
+        if (zoomMode && Input.GetMouseButton(0))
+        {
+            Vector2 currentMousePos = Input.mousePosition;
+            float deltaY = currentMousePos.y - lastMousePos.y;
+
             cam.orthographicSize = Mathf.Clamp(
-                cam.orthographicSize - scroll * scrollZoomSpeed,
+                cam.orthographicSize - deltaY * scrollZoomSpeed * 0.01f,
                 minZoom,
                 maxZoom
             );
+
+            lastMousePos = currentMousePos;
         }
+
+        if (zoomMode && Input.GetMouseButtonUp(0))
+        {
+            zoomMode = false;
+            Debug.Log("❌ Zoom mode deactivated");
+        }
+#endif
+        #endregion
     }
     
     private bool IsTouchOnMap(Vector2 screenPos)

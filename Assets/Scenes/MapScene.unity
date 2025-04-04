@@ -1428,7 +1428,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -10
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -3020,6 +3020,8 @@ MonoBehaviour:
   speedZ: 1
   inertiaDamp: 0.9
   inertiaThreshold: 0.01
+  minZoom: 2
+  maxZoom: 20
 --- !u!1 &1044902687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3627,6 +3629,8 @@ MonoBehaviour:
   speedZ: 0.5
   inertiaDamp: 0.95
   inertiaThreshold: 0.01
+  minZoom: 1
+  maxZoom: 10
 --- !u!1 &1352891902
 GameObject:
   m_ObjectHideFlags: 0
