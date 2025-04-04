@@ -21,6 +21,7 @@ public class CameraPanner : MonoBehaviour
     private float lastClickTime = -1f;
     private bool zoomMode = false;
     private Vector2 lastMousePos;
+    private bool dragStartedOnUI = false;
         
 
     void Update()
@@ -33,8 +34,12 @@ public class CameraPanner : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 lastTouchPos = touch.position;
+                dragStartedOnUI = UIWrappers.IsPointerOverUI(touch.position);
             }
-            else if (touch.phase == TouchPhase.Moved)
+            
+            if (dragStartedOnUI) return;
+            
+            if (touch.phase == TouchPhase.Moved)
             {
                 Vector3 worldA = RaycastToWorld(lastTouchPos);
                 Vector3 worldB = RaycastToWorld(touch.position);
@@ -47,6 +52,8 @@ public class CameraPanner : MonoBehaviour
                 inertia = delta / Time.deltaTime;
 
                 lastTouchPos = touch.position; // bara screen-coord!
+
+                dragStartedOnUI = false;
             }
         }
         
