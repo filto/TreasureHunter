@@ -17,6 +17,7 @@ public class Interaction : MonoBehaviour
     private Vector3 worldPosition;
     private Camera uiCamera;
     private Camera dragCamera;
+    private Collider objectCollider;
     
 
     public void OnTouchEvent(TouchData touchData)
@@ -32,10 +33,11 @@ public class Interaction : MonoBehaviour
                    Debug.Log("Japp på UI)");
                    return;
                }
-               
                 touchStartPosition = touchData.worldPosition;
                 startPosition = interactionObject.transform.position;
                 wasClickedInBeganPhase = true;
+                objectCollider = touchData.hitObject.GetComponent<Collider>();
+                objectCollider.enabled = false;
                 break;
 
             case TouchPhase.Moved:
@@ -83,6 +85,7 @@ public class Interaction : MonoBehaviour
                     }
                 }
                 wasClickedInBeganPhase = false;
+                objectCollider.enabled = true;
                 break;
         }
     }

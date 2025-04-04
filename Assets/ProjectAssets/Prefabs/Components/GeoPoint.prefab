@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2961210970885706345}
+  - component: {fileID: 6515318152277113343}
+  - component: {fileID: 3699695724345420037}
   m_Layer: 0
   m_Name: GeoPoint
   m_TagString: Untagged
@@ -35,6 +37,43 @@ Transform:
   - {fileID: 3486723626756768293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!114 &6515318152277113343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174547441175326212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8334fe025ee64543ad7e94721fa5568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  midPointOffset: {x: 0, y: 0, z: 0}
+  interactionObject: {fileID: 174547441175326212}
+  isDraggable: 1
+  is2DMovement: 0
+--- !u!65 &3699695724345420037
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174547441175326212}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.07, z: 0.26}
+  m_Center: {x: 0, y: 0.36, z: -0.27}
 --- !u!1 &796546279990739279
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,25 +21,33 @@ public class CameraPanner : MonoBehaviour
     private float lastClickTime = -1f;
     private bool zoomMode = false;
     private Vector2 lastMousePos;
-    private bool dragStartedOnUI = false;
+    private bool isActive = false;
         
 
     void Update()
     {
-        
         if (Input.touchCount == 1 && !zoomMode)
         {
             Touch touch = Input.GetTouch(0);
-
+                
             if (touch.phase == TouchPhase.Began)
             {
                 lastTouchPos = touch.position;
-                dragStartedOnUI = UIWrappers.IsPointerOverUI(touch.position);
+                
+                bool touchedUI = UIWrappers.IsPointerOverUI(touch.position);
+                bool touchedMap = IsTouchOnMap(touch.position);
+                isActive = !touchedUI && touchedMap;
+                Debug.Log(isActive);
             }
             
-            if (dragStartedOnUI) return;
+            if (touch.phase == TouchPhase.Ended)
+            {
+                isActive = false;
+            }
             
-            if (touch.phase == TouchPhase.Moved)
+            if (!isActive) return;
+            
+            if (touch.phase == TouchPhase.Moved && isActive)
             {
                 Vector3 worldA = RaycastToWorld(lastTouchPos);
                 Vector3 worldB = RaycastToWorld(touch.position);
@@ -52,9 +60,9 @@ public class CameraPanner : MonoBehaviour
                 inertia = delta / Time.deltaTime;
 
                 lastTouchPos = touch.position; // bara screen-coord!
-
-                dragStartedOnUI = false;
+                
             }
+            
         }
         
         if (Input.touchCount == 2)
@@ -130,7 +138,11 @@ public class CameraPanner : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(screenPos);
         RaycastHit hit;
-        return mapCollider.Raycast(ray, out hit, Mathf.Infinity);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            return hit.collider == mapCollider;
+        }
+        return false;
     }
     
     private Vector3 RaycastToWorld(Vector2 screenPos)
@@ -138,12 +150,12 @@ public class CameraPanner : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(screenPos);
         RaycastHit hit;
 
-        if (mapCollider.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             return hit.point;
         }
-
-        return Vector3.zero; // eller behåll senaste pos om du vill undvika hopp
+        
+        return Vector3.zero;
     }
 
 }
