@@ -144,7 +144,7 @@ TextureImporter:
         width: 233
         height: 216
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -166,7 +166,7 @@ TextureImporter:
         width: 236
         height: 229
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -175,6 +175,72 @@ TextureImporter:
       bones: []
       spriteID: dd857115fcc21964e9c7403ed675737f
       internalID: 1809655693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_2
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 775
+        width: 226
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef412c6a581092e419752d96b1def8ac
+      internalID: 95908101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_3
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 771
+        width: 239
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1329d696cbefa544e9ea12cb16017fb1
+      internalID: -2125829674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_4
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 506
+        width: 265
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ff5d762f32458a4dba54c095cefd6b7
+      internalID: -703475851
       vertices: []
       indices: 
       edges: []
@@ -195,6 +261,9 @@ TextureImporter:
     nameFileIdTable:
       Sprites_0: 1916163470
       Sprites_1: 1809655693
+      Sprites_2: 95908101
+      Sprites_3: -2125829674
+      Sprites_4: -703475851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
