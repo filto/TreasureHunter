@@ -35,6 +35,7 @@ public class Interaction : MonoBehaviour
                }
                 touchStartPosition = touchData.worldPosition;
                 startPosition = interactionObject.transform.position;
+               
                 wasClickedInBeganPhase = true;
                 objectCollider = touchData.hitObject.GetComponent<Collider>();
                 objectCollider.enabled = false;
@@ -45,9 +46,11 @@ public class Interaction : MonoBehaviour
                 if (!wasClickedInBeganPhase) return;
                 
                 if (isDraggable)
-                { 
+                {
                     if (is2DMovement)
-                    interactionObject.transform.position = new Vector3(touchData.worldPosition.x, touchData.worldPosition.y, interactionObject.transform.position.z) + midPointOffset;
+                    {
+                        interactionObject.transform.position = new Vector3(touchData.worldPosition.x, startPosition.y, touchData.worldPosition.z) + midPointOffset;  
+                    }
                     else
                     interactionObject.transform.position = touchData.worldPosition + midPointOffset;
                 }
@@ -61,7 +64,7 @@ public class Interaction : MonoBehaviour
                 if (wasClickedInBeganPhase)
                 {
                     if (is2DMovement)
-                        touchEndPosition = new Vector3(touchData.worldPosition.x, touchData.worldPosition.y, interactionObject.transform.position.z);
+                        touchEndPosition = new Vector3(touchData.worldPosition.x, startPosition.y, touchData.worldPosition.z);
                     else
                         touchEndPosition = touchData.worldPosition;
 
