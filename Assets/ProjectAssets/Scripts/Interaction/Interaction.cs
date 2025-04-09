@@ -92,4 +92,11 @@ public class Interaction : MonoBehaviour
                 break;
         }
     }
+
+    public void Initialize()
+    {
+        var col = interactionObject?.GetComponent<Collider>();
+        if (col != null)
+            col.enabled = true;
+    }
 }

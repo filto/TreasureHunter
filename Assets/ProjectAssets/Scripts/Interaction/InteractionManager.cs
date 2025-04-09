@@ -39,10 +39,18 @@ public class InteractionManager : MonoBehaviour
                 hitObject: hitObject,
                 touchCount:Input.touchCount
             );
-            
+
             if (touchData.phase == TouchPhase.Began)
+            {
+                if (activeObject != null)
+                {
+                    var interaction = activeObject.GetComponent<Interaction>();
+                    interaction?.Initialize(); // Säkerställer återställning
+                }
+
                 activeObject = hitObject;
-            
+            }
+
             if (activeObject == null) return;
             
             activeObject.SendMessage("OnTouchEvent", touchData, SendMessageOptions.DontRequireReceiver);
