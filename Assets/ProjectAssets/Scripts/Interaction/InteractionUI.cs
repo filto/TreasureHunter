@@ -11,6 +11,9 @@ public class InteractionUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Vector2 originalPosition;
     public bool snapToStart;
     private TouchData touchData;
+    public GameObject ghostVisual;
+    private GameObject ghostInstance;
+    public Transform ghostVisualParent;
 
     private void Awake()
     {
@@ -22,13 +25,30 @@ public class InteractionUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         touchData = BuildTouchData(TouchPhase.Began, eventData);
         originalPosition = rectTransform.anchoredPosition;
+        
+        if (ghostVisual != null)
+        {
+            Debug.Log("Skapar kopia");
+            Transform parentToUse = ghostVisualParent != null ? ghostVisualParent : canvas.transform;
+            ghostInstance = Instantiate(ghostVisual, parentToUse);
+            ghostInstance.GetComponent<RectTransform>().anchoredPosition = rectTransform.anchoredPosition;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        // Rör på objektet i canvas, kompensera för skalning
-        touchData = BuildTouchData(TouchPhase.Moved, eventData);
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if (ghostVisual != null)
+        {
+            touchData = BuildTouchData(TouchPhase.Moved, eventData);
+            ghostInstance.GetComponent<RectTransform>().anchoredPosition += eventData.delta / canvas.scaleFactor;
+        }
+        
+        else 
+        {
+            // Rör på objektet i canvas, kompensera för skalning
+            touchData = BuildTouchData(TouchPhase.Moved, eventData);
+            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -39,6 +59,11 @@ public class InteractionUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (snapToStart)
         {
             rectTransform.anchoredPosition = originalPosition;
+        }
+        
+        if (ghostVisual != null)
+        {
+            Destroy(ghostInstance);
         }
     }
 
