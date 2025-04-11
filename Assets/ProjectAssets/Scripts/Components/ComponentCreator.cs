@@ -13,6 +13,14 @@ public class ComponentCreator : MonoBehaviour
        } 
    }
     
+    private void OnDisable()
+    {
+        if (dragScript != null)
+        {
+            dragScript.OnDragEnd -= HandleEndDrag; // ❌ Avregistrera
+        }
+    }
+    
     void HandleEndDrag(TouchData touchData, Vector3 startPosition, GameObject dragObject)
     {
         

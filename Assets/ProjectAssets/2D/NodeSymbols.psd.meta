@@ -232,7 +232,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -254,7 +254,7 @@ TextureImporter:
         width: 128
         height: 127
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -263,6 +263,72 @@ TextureImporter:
       bones: []
       spriteID: 3a792fe1affa1f54a8e8febd57c15779
       internalID: 877353218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NodeSymbols_4
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 897
+        width: 128
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e81ea7fc1f26cd84d8e2d246b6e645a3
+      internalID: -500701835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NodeSymbols_5
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 897
+        width: 122
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc84b7d0be7aa754f85d7cbbbf97f897
+      internalID: -48205852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NodeSymbols_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 769
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 927f962136ac11c48be9ac3e1a45a562
+      internalID: 1475276463
       vertices: []
       indices: 
       edges: []
@@ -286,6 +352,9 @@ TextureImporter:
       NodeSymbols_1: -624898610
       NodeSymbols_2: -1953556798
       NodeSymbols_3: 428783103
+      NodeSymbols_4: -500701835
+      NodeSymbols_5: -48205852
+      NodeSymbols_6: 1475276463
       XMark: 877353218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
