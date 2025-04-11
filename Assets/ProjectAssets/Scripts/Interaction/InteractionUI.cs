@@ -31,7 +31,7 @@ public class InteractionUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             Debug.Log("Skapar kopia");
             Transform parentToUse = ghostVisualParent != null ? ghostVisualParent : canvas.transform;
             ghostInstance = Instantiate(ghostVisual, parentToUse);
-            ghostInstance.GetComponent<RectTransform>().anchoredPosition = rectTransform.anchoredPosition;
+            ghostInstance.GetComponent<RectTransform>().position = rectTransform.position;
         }
     }
 
