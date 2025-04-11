@@ -276,7 +276,7 @@ TextureImporter:
         width: 128
         height: 127
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -298,7 +298,7 @@ TextureImporter:
         width: 122
         height: 127
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -320,7 +320,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -329,6 +329,72 @@ TextureImporter:
       bones: []
       spriteID: 927f962136ac11c48be9ac3e1a45a562
       internalID: 1475276463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PuzzlePoint
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 767
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eada770ab89ebdb438c9ca0f2373c77e
+      internalID: -1557707712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FightPoint
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 767
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 378378baa970d5f468f103f45d7bac8e
+      internalID: -1213045002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InteractionPoint
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 767
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b72bf142ca1cb24d946ea386b9a53ca
+      internalID: 1392901793
       vertices: []
       indices: 
       edges: []
@@ -348,6 +414,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       CheckMark: -6648354
+      FightPoint: -1213045002
+      InteractionPoint: 1392901793
       NodeSymbols_0: -1048534488
       NodeSymbols_1: -624898610
       NodeSymbols_2: -1953556798
@@ -355,6 +423,7 @@ TextureImporter:
       NodeSymbols_4: -500701835
       NodeSymbols_5: -48205852
       NodeSymbols_6: 1475276463
+      PuzzlePoint: -1557707712
       XMark: 877353218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

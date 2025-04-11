@@ -140,7 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1953556798, guid: 09e3d4e7c150b7a4ca861970c563a233, type: 3}
+  m_Sprite: {fileID: -1557707712, guid: 09e3d4e7c150b7a4ca861970c563a233, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4845604604870642576}
   m_Layer: 5
-  m_Name: Icon_MachinePoint
+  m_Name: Icon_PuzzlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
