@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject connectionPrefab;    //Connection prefab
     public GameObject nodeMenu;
     public GameObject interactionManager;
+    public GameObject canvas;
     void Awake()
     {
         if (Instance == null)

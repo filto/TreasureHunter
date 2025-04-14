@@ -679,6 +679,7 @@ MonoBehaviour:
   connectionPrefab: {fileID: 4437084563033375248, guid: 10e6351b197e05741aff3bd652552ab8, type: 3}
   nodeMenu: {fileID: 2126806813}
   interactionManager: {fileID: 2082669170}
+  canvas: {fileID: 369461556}
 --- !u!4 &73117268
 Transform:
   m_ObjectHideFlags: 0

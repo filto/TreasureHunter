@@ -7664,7 +7664,7 @@ MonoBehaviour:
   midPointOffset: {x: 0, y: 0, z: 0}
   interactionObject: {fileID: 3516410681616951175}
   isDraggable: 1
-  is2DMovement: 0
+  is2DMovement: 1
 --- !u!65 &3641410174749973837
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -468,6 +468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2886781762556483800}
+  - component: {fileID: 6109227162856384505}
   - component: {fileID: 6446768589211683760}
   - component: {fileID: 5370211551600366820}
   m_Layer: 0
@@ -504,6 +505,21 @@ Transform:
   - {fileID: 1792346199820172140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6109227162856384505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761623341781280131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475ac274161f0144f8c42f62fd11c123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interaction: {fileID: 6446768589211683760}
+  machineMenu: {fileID: 4130693366467685059, guid: d324637854f384a43b1a027bf7583bc9, type: 3}
+  machineMenuTransform: {fileID: 0}
 --- !u!114 &6446768589211683760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,7 +535,9 @@ MonoBehaviour:
   midPointOffset: {x: 0, y: 0, z: 0}
   interactionObject: {fileID: 761623341781280131}
   isDraggable: 1
-  is2DMovement: 0
+  is2DMovement: 1
+  longPressDuration: 0.5
+  longPressActive: 0
 --- !u!65 &5370211551600366820
 BoxCollider:
   m_ObjectHideFlags: 0

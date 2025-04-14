@@ -5,6 +5,7 @@ public class Interaction : MonoBehaviour
 {
     public event Action<Vector3, TouchData, Vector3, GameObject> OnDragEnd; // 🔥 Bara för detta objekt
     public event Action<GameObject> OnClick;
+    public event Action<GameObject> OnLongPress;
     public Vector3 midPointOffset;
     private Vector3 startPosition; // Store start position
     private float clickThreshold = 0.1f;
@@ -18,6 +19,12 @@ public class Interaction : MonoBehaviour
     private Camera uiCamera;
     private Camera dragCamera;
     private Collider objectCollider;
+    public float longPressDuration = 0.5f;
+    private float pressTime = 0f;
+    private bool longPressTriggered = false;
+    private Vector2 touchStartScreenPosition;
+    private bool isTouchActive = false;
+    public bool longPressActive = false;
     
 
     public void OnTouchEvent(TouchData touchData)
@@ -34,11 +41,17 @@ public class Interaction : MonoBehaviour
                    return;
                }
                 touchStartPosition = touchData.worldPosition;
+                touchStartScreenPosition = touchData.screenPosition;
                 startPosition = interactionObject.transform.position;
                
                 wasClickedInBeganPhase = true;
                 objectCollider = touchData.hitObject.GetComponent<Collider>();
                 objectCollider.enabled = false;
+               
+                isTouchActive = true;
+                pressTime = 0f;
+                longPressTriggered = false;
+               
                 break;
 
             case TouchPhase.Moved:
@@ -68,27 +81,32 @@ public class Interaction : MonoBehaviour
                     else
                         touchEndPosition = touchData.worldPosition;
 
-                    float dragDistance = Vector3.Distance(touchStartPosition, touchEndPosition);
+                    Vector2 touchEndScreenPosition = touchData.screenPosition;
+                    float dragDistance = Vector3.Distance(touchStartScreenPosition, touchEndScreenPosition);
 
-                    //Debug.Log(" " + dragDistance + " " + touchStartPosition + "End:" + touchEndPosition);
+                    Debug.Log(" " + dragDistance + " " + touchStartScreenPosition + "End:" + touchEndScreenPosition);
 
-                    if (dragDistance <= clickThreshold)
+                    if (dragDistance <= clickThreshold && !longPressTriggered)
                     {
                         //Debug.Log("Nu klickar jag");
 
                         OnClick?.Invoke(gameObject);
                         interactionObject.transform.position = startPosition;
-                        return;
+                        Debug.Log("📌 Click triggered");
                     }
 
-                    if (isDraggable)
+                    else if (isDraggable)
                     {
 
                         OnDragEnd?.Invoke(touchEndPosition, touchData, startPosition, interactionObject);
                     }
                 }
+                
                 wasClickedInBeganPhase = false;
                 objectCollider.enabled = true;
+                isTouchActive = false;
+                pressTime = 0f;
+                longPressTriggered = false;
                 break;
         }
     }
@@ -98,5 +116,20 @@ public class Interaction : MonoBehaviour
         var col = interactionObject?.GetComponent<Collider>();
         if (col != null)
             col.enabled = true;
+    }
+    
+    private void Update()
+    {
+        if (longPressActive && isTouchActive && !longPressTriggered)
+        {
+            pressTime += Time.deltaTime;
+
+            if (pressTime >= longPressDuration)
+            {
+                longPressTriggered = true;
+                OnLongPress?.Invoke(gameObject);
+                Debug.Log("📌 Long press triggered (via Update)");
+            }
+        }
     }
 }
