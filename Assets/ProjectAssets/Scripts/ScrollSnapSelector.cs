@@ -7,15 +7,13 @@ public class ScrollSnapSelector : MonoBehaviour
     public ScrollRect scrollRect;
     public RectTransform content;
     public RectTransform viewport;
-
-    public float snapSpeed = 10f;
-    public float snapThreshold = 0.001f;
+    
     public float offsetY = 0f;
     public GameObject[] menuViews;
 
     private RectTransform[] items;
     private bool isDragging;
-    private int currentIndex = -1;
+    private int currentIndex;
     
 
     void Start()
