@@ -1,10 +1,13 @@
 using UnityEngine;
+using System;
 
 public class SwitchEditorGame : MonoBehaviour
 {
     public GameObject[] gameModeObjects;
     public GameObject[] editorModeObjects;
+    public static bool CurrentModeIsGame = false;
     
+    public static event Action<bool> OnModeChanged; // true = Game, false = Editor
     
     public void SwitchGameMode()
     {
@@ -19,6 +22,8 @@ public class SwitchEditorGame : MonoBehaviour
             if (editorModeObjects[i] != null)
                 editorModeObjects[i].SetActive(false);
         }
+        CurrentModeIsGame = true;
+        OnModeChanged?.Invoke(true);
     }
     
     public void SwitchEditorMode()
@@ -34,6 +39,7 @@ public class SwitchEditorGame : MonoBehaviour
             if (gameModeObjects[i] != null)
                 gameModeObjects[i].SetActive(false);
         }
-        
+        CurrentModeIsGame = false;
+        OnModeChanged?.Invoke(false);
     }
 }

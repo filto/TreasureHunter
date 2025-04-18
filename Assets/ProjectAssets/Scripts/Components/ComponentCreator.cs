@@ -30,7 +30,14 @@ public class ComponentCreator : MonoBehaviour
         }
         
         Debug.Log(touchData.hitObject.name);
-        Instantiate(componentPrefab, touchData.worldPosition, componentPrefab.transform.rotation);
+        GameObject newObj = Instantiate(componentPrefab, touchData.worldPosition, componentPrefab.transform.rotation);
+
+        var modeSwitcher = newObj.GetComponent<ModeSwitcher>();
+        if (modeSwitcher != null)
+        {
+            modeSwitcher.SetGameMode(SwitchEditorGame.CurrentModeIsGame); 
+        }
+        
 
     }
 }
