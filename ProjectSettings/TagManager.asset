@@ -9,6 +9,7 @@ TagManager:
   - UI
   - Map
   - TrashCan
+  - MachineConnector
   layers:
   - Default
   - TransparentFX
