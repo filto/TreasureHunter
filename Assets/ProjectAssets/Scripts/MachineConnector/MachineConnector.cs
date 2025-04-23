@@ -5,51 +5,57 @@ public class MachineConnector : MonoBehaviour
     public string machineID;
     public Transform connectionPoint;
     private MachineConnector dummyConnector;
-
-    private void Reset()
-    {
-        if (connectionPoint == null)
-            connectionPoint = this.transform;
-    }
-
-    public void OnConnected(MachineConnector other)
-    {
-        Debug.Log($"{name} connected to {other.name}");
-    }
+    private MachineConnector currentFrom;
 
     public void OnTouchEvent(TouchData touchData)
     {
         switch (touchData.phase)
         {
             case TouchPhase.Began:
-                dummyConnector = CreateMouseFollower();
-                MachineConnectorManager.Instance.CreateConnection(this, dummyConnector);
-                dummyConnector.transform.position = GetMouseOnConnectorPlane(touchData.screenPosition);
+                currentFrom = this;
+                StartConnectionFrom(currentFrom, touchData.screenPosition);
                 break;
 
             case TouchPhase.Moved:
                 if (dummyConnector != null)
                 {
                     dummyConnector.transform.position = GetMouseOnConnectorPlane(touchData.screenPosition);
+
+                    if (touchData.hitObject != null && touchData.hitObject.CompareTag("MachineConnector"))
+                    {
+                        MachineConnector hit = touchData.hitObject.GetComponent<MachineConnector>();
+                        
+                        if (hit != currentFrom  && !MachineConnectorManager.Instance.ConnectionExists(currentFrom , hit))
+                        {
+                            CleanupDummyConnection();
+                            MachineConnectorManager.Instance.CreateConnection(currentFrom, hit);
+                            currentFrom = hit;
+                            StartConnectionFrom(hit, touchData.screenPosition);
+                        }
+                    }
                 }
                 break;
 
             case TouchPhase.Ended:
-                if (dummyConnector != null)
-                {
-                    MachineConnectorManager.Instance.RemoveConnection(dummyConnector);
-                    Destroy(dummyConnector.gameObject);
-                    
-                    if (touchData.hitObject != null && touchData.hitObject.CompareTag("MachineConnector"))
-                    {
-                        MachineConnector other = touchData.hitObject.GetComponent<MachineConnector>();
-                        MachineConnectorManager.Instance.CreateConnection(this, other);
-                        OnConnected(other);
-                        other.OnConnected(this);
-                    }
-                    dummyConnector = null;
-                }
+                CleanupDummyConnection();
                 break;
+        }
+    }
+
+    private void StartConnectionFrom(MachineConnector from, Vector2 screenPosition)
+    {
+        dummyConnector = CreateMouseFollower();
+        dummyConnector.transform.position = GetMouseOnConnectorPlane(screenPosition);
+        MachineConnectorManager.Instance.CreateConnection(from, dummyConnector);
+    }
+
+    private void CleanupDummyConnection()
+    {
+        if (dummyConnector != null)
+        {
+            MachineConnectorManager.Instance.RemoveConnection(dummyConnector);
+            Destroy(dummyConnector.gameObject);
+            dummyConnector = null;
         }
     }
 
@@ -60,7 +66,7 @@ public class MachineConnector : MonoBehaviour
         connector.connectionPoint = follower.transform;
         return connector;
     }
-    
+
     private Vector3 GetMouseOnConnectorPlane(Vector2 screenPos)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPos);
@@ -71,6 +77,6 @@ public class MachineConnector : MonoBehaviour
             return ray.GetPoint(enter);
         }
 
-        return connectionPoint.position; // fallback ifall raycasten failar
+        return connectionPoint.position;
     }
 }
