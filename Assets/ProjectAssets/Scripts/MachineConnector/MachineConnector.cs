@@ -24,13 +24,13 @@ public class MachineConnector : MonoBehaviour
             case TouchPhase.Began:
                 dummyConnector = CreateMouseFollower();
                 MachineConnectorManager.Instance.CreateConnection(this, dummyConnector);
+                dummyConnector.transform.position = GetMouseOnConnectorPlane(touchData.screenPosition);
                 break;
 
             case TouchPhase.Moved:
                 if (dummyConnector != null)
                 {
-                    Vector3 worldPos = touchData.worldPosition;
-                    dummyConnector.transform.position = new Vector3(worldPos.x, this.transform.position.y, worldPos.z);
+                    dummyConnector.transform.position = GetMouseOnConnectorPlane(touchData.screenPosition);
                 }
                 break;
 
@@ -59,5 +59,18 @@ public class MachineConnector : MonoBehaviour
         MachineConnector connector = follower.AddComponent<MachineConnector>();
         connector.connectionPoint = follower.transform;
         return connector;
+    }
+    
+    private Vector3 GetMouseOnConnectorPlane(Vector2 screenPos)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+        Plane plane = new Plane(Vector3.up, connectionPoint.position);
+
+        if (plane.Raycast(ray, out float enter))
+        {
+            return ray.GetPoint(enter);
+        }
+
+        return connectionPoint.position; // fallback ifall raycasten failar
     }
 }
