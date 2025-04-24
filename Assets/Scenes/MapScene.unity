@@ -10999,6 +10999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectionMaterial: {fileID: 2100000, guid: 6999f9a98587a1443b3616f347332752, type: 2}
   lineWidth: 0.2
+  connectionLayer: 3
 --- !u!1 &1543645769
 GameObject:
   m_ObjectHideFlags: 0

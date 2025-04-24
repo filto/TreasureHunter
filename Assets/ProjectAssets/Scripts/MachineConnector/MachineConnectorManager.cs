@@ -9,6 +9,7 @@ public class MachineConnectorManager : MonoBehaviour
     private List<Connection> connections = new List<Connection>();
     public Material connectionMaterial;
     public float lineWidth = 0.1f;
+    public int connectionLayer = 0;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class MachineConnectorManager : MonoBehaviour
         visual.AddComponent<MeshFilter>().mesh = new Mesh();
         var renderer = visual.AddComponent<MeshRenderer>();
         renderer.material = connectionMaterial;
+        visual.layer = connectionLayer;
 
         var conn = new Connection(from, to, visual, lineWidth);
         connections.Add(conn);
