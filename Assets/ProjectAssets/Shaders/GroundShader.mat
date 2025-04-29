@@ -63,6 +63,6 @@ Material:
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _GridColor: {r: 0.8867924, g: 0.8324136, b: 0.8324136, a: 0}
-    - _MainColor: {r: 0.8, g: 0.7490196, b: 0.6862745, a: 0}
+    - _MainColor: {r: 0.7075472, g: 0.6611676, b: 0.6040851, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
