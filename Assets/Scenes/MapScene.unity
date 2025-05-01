@@ -28838,7 +28838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4811321, g: 0.4235017, b: 0.38354397, a: 1}
+  m_Color: {r: 0.5754717, g: 0.47210667, b: 0.4316038, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -29557,7 +29557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionMaterial: {fileID: 2100000, guid: 6999f9a98587a1443b3616f347332752, type: 2}
-  lineWidth: 0.2
+  lineWidth: 0.02
   connectionLayer: 3
 --- !u!1 &1543645769
 GameObject:

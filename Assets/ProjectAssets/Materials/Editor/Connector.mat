@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grey_Rim
+  m_Name: Connector
   m_Shader: {fileID: 4800000, guid: ea4ee0770c5d3c6408d57d0469df1024, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -58,7 +58,7 @@ Material:
     - _SpecularHighlights: 1
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 0}
+    - _MainColor: {r: 1, g: 0.85013306, b: 0.43867922, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0}
     - _Vector0: {r: 0, g: 15, b: 10, a: 0}
     - _outlineColor: {r: 0.7264151, g: 0.640753, b: 0.640753, a: 0}
