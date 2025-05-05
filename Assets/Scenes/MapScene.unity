@@ -6010,10 +6010,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Icon_GeoPoint
       objectReference: {fileID: 0}
-    - target: {fileID: 3521914226960454747, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4845604604870642576, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6096,27 +6092,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6151512430271404129, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
       propertyPath: m_Color.b
-      value: 0.9339623
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6151512430271404129, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
       propertyPath: m_Color.g
-      value: 0.7505852
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6151512430271404129, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
       propertyPath: m_Color.r
-      value: 0.43614274
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8896377595014768600, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
       propertyPath: m_Color.b
-      value: 0.9024564
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8896377595014768600, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
       propertyPath: m_Color.g
-      value: 0.96427304
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8896377595014768600, guid: 20063bfc14e9304448fcf0abce429ea7, type: 3}
       propertyPath: m_Color.r
-      value: 0.9811321
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52575,7 +52571,7 @@ MonoBehaviour:
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 185, y: 185}
+  m_CellSize: {x: 200, y: 200}
   m_Spacing: {x: 54.88, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
