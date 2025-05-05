@@ -277,11 +277,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 892.14
+      value: 945
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -814,7 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6462264, g: 0.89448863, b: 1, a: 1}
+  m_Color: {r: 0.4481132, g: 0.9037886, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7053782, g: 0.4094874, b: 0.8113208, a: 1}
+  m_Color: {r: 0.66635627, g: 0.125534, b: 0.8584906, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -960,11 +960,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -996,7 +996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1371.9
+      value: 1455
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2089,7 +2089,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 1
+  m_Antialiasing: 3
   m_AntialiasingQuality: 0
   m_StopNaN: 0
   m_Dithering: 0
@@ -2103,7 +2103,7 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
+    m_Quality: 1
     m_FrameInfluence: 0.1
     m_JitterScale: 1
     m_MipBias: 0
@@ -3017,8 +3017,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.8396226, g: 0.8294038, b: 0.7802154, a: 1}
-  m_Intensity: 0.88
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.86
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4069,8 +4069,8 @@ MonoBehaviour:
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 185, y: 185}
-  m_Spacing: {x: 54.88, y: 0}
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 55, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!1 &612292733 stripped
@@ -5567,11 +5567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5603,7 +5603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1611.78
+      value: 1710
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6517,7 +6517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.64705884, b: 0.8322167, a: 1}
+  m_Color: {r: 1, g: 0.6020417, b: 0.3820755, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7095,7 +7095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9604424, g: 0.514151, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.33333337, b: 0.59416234, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7209,7 +7209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4431373, g: 0.7372549, b: 0.85098046, a: 1}
+  m_Color: {r: 0.2783019, g: 0.6821006, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -27315,11 +27315,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27351,7 +27351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 172.5
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -28505,11 +28505,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28541,7 +28541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 652.26
+      value: 690
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -28834,7 +28834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5754717, g: 0.47210667, b: 0.4316038, a: 1}
+  m_Color: {r: 0.6132076, g: 0.45864305, b: 0.42519584, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -29318,7 +29318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.44335175, g: 0.5848907, b: 0.764151, a: 1}
+  m_Color: {r: 0.127759, g: 0.43200105, b: 0.8207547, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -52065,11 +52065,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52101,7 +52101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1132.02
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -52181,11 +52181,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52217,7 +52217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 412.38
+      value: 435
       objectReference: {fileID: 0}
     - target: {fileID: 8860830167183895997, guid: d1d158381d0068043adf439f458a2d62, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -52572,7 +52572,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 200, y: 200}
-  m_Spacing: {x: 54.88, y: 0}
+  m_Spacing: {x: 55, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!114 &565035650629082206
