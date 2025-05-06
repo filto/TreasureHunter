@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Streets
+  m_Name: Houses_Hole
   m_Shader: {fileID: 4800000, guid: 784f719ce2fdade40a2c9b78835c25c5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -56,7 +56,7 @@ Material:
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
     - _Float0: 0.56
-    - _GridMaskAlpha: 0.29
+    - _GridMaskAlpha: 0.14
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -64,8 +64,8 @@ Material:
     m_Colors:
     - _Blue_Color: {r: 0.5660378, g: 0.48113212, b: 0.42452833, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GridColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
-    - _Red_Color: {r: 0.7264151, g: 0.67223954, b: 0.59278214, a: 1}
+    - _GridColor: {r: 0.8962264, g: 0.89199895, b: 0.89199895, a: 0}
+    - _Red_Color: {r: 0.6784314, g: 0.61960787, b: 0.52156866, a: 0}
     - _TilingGrid: {r: 1, g: 1, b: 0, a: 0}
     - _TilingOffsetMask: {r: 0.2, g: 0.2, b: 1, a: 1}
   m_BuildTextureStacks: []

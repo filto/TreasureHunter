@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GroundShader
-  m_Shader: {fileID: 4800000, guid: aa435742cdd577a45917a43fd8212c3b, type: 3}
+  m_Name: Houses
+  m_Shader: {fileID: 4800000, guid: 784f719ce2fdade40a2c9b78835c25c5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,14 +25,14 @@ Material:
     m_TexEnvs:
     - _GridMask:
         m_Texture: {fileID: 2800000, guid: e1e854689fc79d743a2ae445b6e2722c, type: 3}
-        m_Scale: {x: 1, y: 0.96}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GridPattern:
         m_Texture: {fileID: 2800000, guid: d13e323ff29bd1942909de14d75f8f17, type: 3}
-        m_Scale: {x: 15, y: 15}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 75b946a0020154c468c46e0130700533, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -55,14 +55,18 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
-    - _GridMaskAlpha: 0.08
+    - _Float0: 0.56
+    - _GridMaskAlpha: 0.53
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SpecularHighlights: 1
     m_Colors:
+    - _Blue_Color: {r: 0.5660378, g: 0.48113212, b: 0.42452833, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GridColor: {r: 0.9056604, g: 0.85866857, b: 0.85866857, a: 0}
-    - _MainColor: {r: 0.6415094, g: 0.5768774, b: 0.493236, a: 0}
+    - _GridColor: {r: 0.9716981, g: 0.9579477, b: 0.9579477, a: 0}
+    - _Red_Color: {r: 0.6415094, g: 0.57687736, b: 0.49323595, a: 0}
+    - _TilingGrid: {r: 1, g: 1, b: 0, a: 0}
+    - _TilingOffsetMask: {r: 0.2, g: 0.2, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Streets
-  m_Shader: {fileID: 4800000, guid: 784f719ce2fdade40a2c9b78835c25c5, type: 3}
+  m_Name: GroundShader
+  m_Shader: {fileID: 4800000, guid: aa435742cdd577a45917a43fd8212c3b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,10 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _GridPattern:
         m_Texture: {fileID: 2800000, guid: d13e323ff29bd1942909de14d75f8f17, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 0}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: 75b946a0020154c468c46e0130700533, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -55,17 +55,15 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
-    - _Float0: 0.56
-    - _GridMaskAlpha: 0.29
+    - _GridMaskAlpha: 0.67
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SpecularHighlights: 1
     m_Colors:
-    - _Blue_Color: {r: 0.5660378, g: 0.48113212, b: 0.42452833, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GridColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
-    - _Red_Color: {r: 0.7264151, g: 0.67223954, b: 0.59278214, a: 1}
+    - _GridColor: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 0}
+    - _MainColor: {r: 0.6792453, g: 0.6202427, b: 0.52224994, a: 0}
     - _TilingGrid: {r: 1, g: 1, b: 0, a: 0}
     - _TilingOffsetMask: {r: 0.2, g: 0.2, b: 1, a: 1}
   m_BuildTextureStacks: []

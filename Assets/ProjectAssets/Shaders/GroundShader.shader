@@ -11,7 +11,8 @@ Shader "GroundShader"
 		_GridColor("GridColor", Color) = (0,0,0,0)
 		_GridMask("GridMask", 2D) = "white" {}
 		_GridMaskAlpha("GridMaskAlpha", Range( 0 , 1)) = 0
-		[HideInInspector] _texcoord( "", 2D ) = "white" {}
+		_TilingGrid("TilingGrid", Vector) = (1,1,0,0)
+		_TilingOffsetMask("TilingOffsetMask", Vector) = (1,1,1,1)
 
 
 		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
@@ -252,7 +253,8 @@ Shader "GroundShader"
 				#define ENABLE_TERRAIN_PERPIXEL_NORMAL
 			#endif
 
-			
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
+
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
 				#define ASE_SV_DEPTH SV_DepthLessEqual
@@ -294,7 +296,7 @@ Shader "GroundShader"
 				#if defined(USE_APV_PROBE_OCCLUSION)
 					float4 probeOcclusion : TEXCOORD8;
 				#endif
-				float4 ase_texcoord9 : TEXCOORD9;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -302,8 +304,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -347,10 +349,7 @@ Shader "GroundShader"
 				UNITY_TRANSFER_INSTANCE_ID(input, output);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
-				output.ase_texcoord9.xy = input.texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				output.ase_texcoord9.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = input.positionOS.xyz;
@@ -545,12 +544,11 @@ Shader "GroundShader"
 
 				WorldViewDirection = SafeNormalize( WorldViewDirection );
 
-				float2 uv_GridPattern = input.ase_texcoord9.xy * _GridPattern_ST.xy + _GridPattern_ST.zw;
-				float2 uv_GridMask = input.ase_texcoord9.xy * _GridMask_ST.xy + _GridMask_ST.zw;
-				float3 lerpResult18 = lerp( float3( 1,1,1 ) , _GridColor.rgb , ( tex2D( _GridPattern, uv_GridPattern ).rgb * ( tex2D( _GridMask, uv_GridMask ).rgb + _GridMaskAlpha ) ));
+				float2 temp_output_24_0 = (WorldPosition).xz;
+				float3 lerpResult43 = lerp( float3( 1,1,1 ) , _GridColor.rgb , saturate( ( tex2D( _GridPattern, ( temp_output_24_0 * _TilingGrid ) ).r * ( tex2D( _GridMask, ( ( temp_output_24_0 * (_TilingOffsetMask).xy ) + (_TilingOffsetMask).zw ) ).rgb + _GridMaskAlpha ) ) ));
 				
 
-				float3 BaseColor = ( _MainColor * float4( lerpResult18 , 0.0 ) ).rgb;
+				float3 BaseColor = ( _MainColor * float4( lerpResult43 , 0.0 ) ).rgb;
 				float3 Normal = float3(0, 0, 1);
 				float3 Emission = 0;
 				float3 Specular = 0.5;
@@ -891,8 +889,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -1194,8 +1192,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -1434,7 +1432,8 @@ Shader "GroundShader"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/MetaInput.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
+
 
 			struct Attributes
 			{
@@ -1460,7 +1459,7 @@ Shader "GroundShader"
 					float4 VizUV : TEXCOORD2;
 					float4 LightCoord : TEXCOORD3;
 				#endif
-				float4 ase_texcoord4 : TEXCOORD4;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -1468,8 +1467,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -1513,10 +1512,7 @@ Shader "GroundShader"
 				UNITY_TRANSFER_INSTANCE_ID(input, output);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
-				output.ase_texcoord4.xy = input.texcoord0.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				output.ase_texcoord4.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = input.positionOS.xyz;
@@ -1667,12 +1663,11 @@ Shader "GroundShader"
 					#endif
 				#endif
 
-				float2 uv_GridPattern = input.ase_texcoord4.xy * _GridPattern_ST.xy + _GridPattern_ST.zw;
-				float2 uv_GridMask = input.ase_texcoord4.xy * _GridMask_ST.xy + _GridMask_ST.zw;
-				float3 lerpResult18 = lerp( float3( 1,1,1 ) , _GridColor.rgb , ( tex2D( _GridPattern, uv_GridPattern ).rgb * ( tex2D( _GridMask, uv_GridMask ).rgb + _GridMaskAlpha ) ));
+				float2 temp_output_24_0 = (WorldPosition).xz;
+				float3 lerpResult43 = lerp( float3( 1,1,1 ) , _GridColor.rgb , saturate( ( tex2D( _GridPattern, ( temp_output_24_0 * _TilingGrid ) ).r * ( tex2D( _GridMask, ( ( temp_output_24_0 * (_TilingOffsetMask).xy ) + (_TilingOffsetMask).zw ) ).rgb + _GridMaskAlpha ) ) ));
 				
 
-				float3 BaseColor = ( _MainColor * float4( lerpResult18 , 0.0 ) ).rgb;
+				float3 BaseColor = ( _MainColor * float4( lerpResult43 , 0.0 ) ).rgb;
 				float3 Emission = 0;
 				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
@@ -1737,13 +1732,14 @@ Shader "GroundShader"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
+
 
 			struct Attributes
 			{
 				float4 positionOS : POSITION;
 				float3 normalOS : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1756,7 +1752,7 @@ Shader "GroundShader"
 				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
 					float4 shadowCoord : TEXCOORD1;
 				#endif
-				float4 ase_texcoord2 : TEXCOORD2;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -1764,8 +1760,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -1809,10 +1805,7 @@ Shader "GroundShader"
 				UNITY_TRANSFER_INSTANCE_ID( input, output );
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( output );
 
-				output.ase_texcoord2.xy = input.ase_texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				output.ase_texcoord2.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = input.positionOS.xyz;
@@ -1849,8 +1842,7 @@ Shader "GroundShader"
 			{
 				float4 positionOS : INTERNALTESSPOS;
 				float3 normalOS : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1867,7 +1859,7 @@ Shader "GroundShader"
 				UNITY_TRANSFER_INSTANCE_ID(input, output);
 				output.positionOS = input.positionOS;
 				output.normalOS = input.normalOS;
-				output.ase_texcoord = input.ase_texcoord;
+				
 				return output;
 			}
 
@@ -1906,7 +1898,7 @@ Shader "GroundShader"
 				Attributes output = (Attributes) 0;
 				output.positionOS = patch[0].positionOS * bary.x + patch[1].positionOS * bary.y + patch[2].positionOS * bary.z;
 				output.normalOS = patch[0].normalOS * bary.x + patch[1].normalOS * bary.y + patch[2].normalOS * bary.z;
-				output.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1943,12 +1935,11 @@ Shader "GroundShader"
 					#endif
 				#endif
 
-				float2 uv_GridPattern = input.ase_texcoord2.xy * _GridPattern_ST.xy + _GridPattern_ST.zw;
-				float2 uv_GridMask = input.ase_texcoord2.xy * _GridMask_ST.xy + _GridMask_ST.zw;
-				float3 lerpResult18 = lerp( float3( 1,1,1 ) , _GridColor.rgb , ( tex2D( _GridPattern, uv_GridPattern ).rgb * ( tex2D( _GridMask, uv_GridMask ).rgb + _GridMaskAlpha ) ));
+				float2 temp_output_24_0 = (WorldPosition).xz;
+				float3 lerpResult43 = lerp( float3( 1,1,1 ) , _GridColor.rgb , saturate( ( tex2D( _GridPattern, ( temp_output_24_0 * _TilingGrid ) ).r * ( tex2D( _GridMask, ( ( temp_output_24_0 * (_TilingOffsetMask).xy ) + (_TilingOffsetMask).zw ) ).rgb + _GridMaskAlpha ) ) ));
 				
 
-				float3 BaseColor = ( _MainColor * float4( lerpResult18 , 0.0 ) ).rgb;
+				float3 BaseColor = ( _MainColor * float4( lerpResult43 , 0.0 ) ).rgb;
 				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
 
@@ -2051,8 +2042,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -2369,7 +2360,8 @@ Shader "GroundShader"
 				#define ENABLE_TERRAIN_PERPIXEL_NORMAL
 			#endif
 
-			
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
+
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
 				#define ASE_SV_DEPTH SV_DepthLessEqual
@@ -2411,7 +2403,7 @@ Shader "GroundShader"
 				#if defined(USE_APV_PROBE_OCCLUSION)
 					float4 probeOcclusion : TEXCOORD8;
 				#endif
-				float4 ase_texcoord9 : TEXCOORD9;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -2419,8 +2411,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -2466,10 +2458,7 @@ Shader "GroundShader"
 				UNITY_TRANSFER_INSTANCE_ID(input, output);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
-				output.ase_texcoord9.xy = input.texcoord.xy;
 				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				output.ase_texcoord9.zw = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = input.positionOS.xyz;
 				#else
@@ -2662,12 +2651,11 @@ Shader "GroundShader"
 
 				WorldViewDirection = SafeNormalize( WorldViewDirection );
 
-				float2 uv_GridPattern = input.ase_texcoord9.xy * _GridPattern_ST.xy + _GridPattern_ST.zw;
-				float2 uv_GridMask = input.ase_texcoord9.xy * _GridMask_ST.xy + _GridMask_ST.zw;
-				float3 lerpResult18 = lerp( float3( 1,1,1 ) , _GridColor.rgb , ( tex2D( _GridPattern, uv_GridPattern ).rgb * ( tex2D( _GridMask, uv_GridMask ).rgb + _GridMaskAlpha ) ));
+				float2 temp_output_24_0 = (WorldPosition).xz;
+				float3 lerpResult43 = lerp( float3( 1,1,1 ) , _GridColor.rgb , saturate( ( tex2D( _GridPattern, ( temp_output_24_0 * _TilingGrid ) ).r * ( tex2D( _GridMask, ( ( temp_output_24_0 * (_TilingOffsetMask).xy ) + (_TilingOffsetMask).zw ) ).rgb + _GridMaskAlpha ) ) ));
 				
 
-				float3 BaseColor = ( _MainColor * float4( lerpResult18 , 0.0 ) ).rgb;
+				float3 BaseColor = ( _MainColor * float4( lerpResult43 , 0.0 ) ).rgb;
 				float3 Normal = float3(0, 0, 1);
 				float3 Emission = 0;
 				float3 Specular = 0.5;
@@ -2858,8 +2846,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -3108,8 +3096,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -3368,8 +3356,8 @@ Shader "GroundShader"
 			CBUFFER_START(UnityPerMaterial)
 			float4 _MainColor;
 			float4 _GridColor;
-			float4 _GridPattern_ST;
-			float4 _GridMask_ST;
+			float4 _TilingOffsetMask;
+			float2 _TilingGrid;
 			float _GridMaskAlpha;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
@@ -3492,15 +3480,25 @@ Shader "GroundShader"
 }
 /*ASEBEGIN
 Version=19801
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;16;-254.7017,9.189484;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT3;0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.ColorNode;11;-736,-176;Inherit;False;Property;_MainColor;MainColor;1;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.ColorNode;14;-848,48;Inherit;False;Property;_GridColor;GridColor;2;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.LerpOp;18;-592,320;Inherit;False;3;0;FLOAT3;1,1,1;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.SamplerNode;12;-1120,320;Inherit;True;Property;_GridPattern;GridPattern;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;20;-729.5626,581.6049;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.SamplerNode;19;-1232,592;Inherit;True;Property;_GridMask;GridMask;3;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.SimpleAddOpNode;21;-896,768;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.RangedFloatNode;22;-1248,880;Inherit;False;Property;_GridMaskAlpha;GridMaskAlpha;4;0;Create;True;0;0;0;False;0;False;0;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;19;-1616,608;Inherit;True;Property;_GridMask;GridMask;3;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.SimpleAddOpNode;21;-1280,784;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;22;-1632,896;Inherit;False;Property;_GridMaskAlpha;GridMaskAlpha;4;0;Create;True;0;0;0;False;0;False;0;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;31;-1968,624;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;37;-1792,672;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.ComponentMaskNode;36;-2192,608;Inherit;False;True;True;False;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.ComponentMaskNode;38;-2176,752;Inherit;False;False;False;True;True;1;0;FLOAT4;0,0,0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.Vector4Node;33;-2416,592;Inherit;False;Property;_TilingOffsetMask;TilingOffsetMask;6;0;Create;True;0;0;0;False;0;False;1,1,1,1;1,1,1,1;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;12;-1616,304;Inherit;True;Property;_GridPattern;GridPattern;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.WorldPosInputsNode;23;-2336,144;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;25;-1824,304;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;1,1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.ComponentMaskNode;24;-2096,176;Inherit;False;True;False;True;True;1;0;FLOAT3;0,0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.Vector2Node;28;-2144,368;Inherit;False;Property;_TilingGrid;TilingGrid;5;0;Create;True;0;0;0;False;0;False;1,1;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;20;-1104,560;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.LerpOp;43;-818.0448,301.5845;Inherit;False;3;0;FLOAT3;1,1,1;False;1;FLOAT3;1,1,1;False;2;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.ColorNode;14;-1168,160;Inherit;False;Property;_GridColor;GridColor;2;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.SaturateNode;44;-886.846,610.9512;Inherit;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;16;-384,-32;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT3;0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.ColorNode;11;-864,-208;Inherit;False;Property;_MainColor;MainColor;1;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;0,0;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;0;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;True;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=DepthOnly;False;False;0;;0;0;Standard;0;False;0
@@ -3512,14 +3510,26 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;8;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,0;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ScenePickingPass;0;9;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;10;0,0;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;MotionVectors;0;10;MotionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;False;False;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=MotionVectors;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;True;-1;3;UnityEditor.ShaderGraphLitGUI;0;12;GroundShader;94348b07e5e8bab40bd6c8a1e3df54cd;True;Forward;0;1;Forward;21;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;True;1;1;False;;0;False;;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;45;Lighting Model;0;0;Workflow;1;0;Surface;0;0;  Refraction Model;0;0;  Blend;0;0;Two Sided;1;0;Alpha Clipping;1;0;  Use Shadow Threshold;0;0;Fragment Normal Space,InvertActionOnDeselection;0;0;Forward Only;0;0;Transmission;0;0;  Transmission Shadow;0.5,False,;0;Translucency;0;0;  Translucency Strength;1,False,;0;  Normal Distortion;0.5,False,;0;  Scattering;2,False,;0;  Direct;0.9,False,;0;  Ambient;0.1,False,;0;  Shadow;0.5,False,;0;Cast Shadows;1;0;Receive Shadows;1;0;Receive SSAO;1;0;Motion Vectors;1;0;  Add Precomputed Velocity;0;0;GPU Instancing;1;0;LOD CrossFade;1;0;Built-in Fog;1;0;_FinalColorxAlpha;0;0;Meta Pass;1;0;Override Baked GI;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Write Depth;0;0;  Early Z;0;0;Vertex Position,InvertActionOnDeselection;1;0;Debug Display;0;0;Clear Coat;0;0;0;11;False;True;True;True;True;True;True;True;True;True;True;False;;False;0
-WireConnection;16;0;11;0
-WireConnection;16;1;18;0
-WireConnection;18;1;14;5
-WireConnection;18;2;20;0
-WireConnection;20;0;12;5
-WireConnection;20;1;21;0
+WireConnection;19;1;37;0
 WireConnection;21;0;19;5
 WireConnection;21;1;22;0
+WireConnection;31;0;24;0
+WireConnection;31;1;36;0
+WireConnection;37;0;31;0
+WireConnection;37;1;38;0
+WireConnection;36;0;33;0
+WireConnection;38;0;33;0
+WireConnection;12;1;25;0
+WireConnection;25;0;24;0
+WireConnection;25;1;28;0
+WireConnection;24;0;23;0
+WireConnection;20;0;12;1
+WireConnection;20;1;21;0
+WireConnection;43;1;14;5
+WireConnection;43;2;44;0
+WireConnection;44;0;20;0
+WireConnection;16;0;11;0
+WireConnection;16;1;43;0
 WireConnection;1;0;16;0
 ASEEND*/
-//CHKSM=BABF321EF269589C7CE783A7E8B46A692D2ACB59
+//CHKSM=DA1CD706CEF7E9E2A7B8525A1B5D69C5D6B26D59
