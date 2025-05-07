@@ -6,6 +6,11 @@ public class SwitchEditorGame : MonoBehaviour
     public GameObject[] gameModeObjects;
     public GameObject[] editorModeObjects;
     public static bool CurrentModeIsGame = false;
+    [Header("Ambient Lighting Colors")]
+    [ColorUsage(true, true)]
+    public Color gameModeAmbientColor = Color.white;
+    [ColorUsage(true, true)]
+    public Color editorModeAmbientColor = Color.gray;
     
     public static event Action<bool> OnModeChanged; // true = Game, false = Editor
     
@@ -22,6 +27,9 @@ public class SwitchEditorGame : MonoBehaviour
             if (editorModeObjects[i] != null)
                 editorModeObjects[i].SetActive(false);
         }
+        
+        RenderSettings.ambientLight = gameModeAmbientColor;
+        
         CurrentModeIsGame = true;
         OnModeChanged?.Invoke(true);
     }
@@ -39,6 +47,9 @@ public class SwitchEditorGame : MonoBehaviour
             if (gameModeObjects[i] != null)
                 gameModeObjects[i].SetActive(false);
         }
+        
+        RenderSettings.ambientLight = editorModeAmbientColor;
+        
         CurrentModeIsGame = false;
         OnModeChanged?.Invoke(false);
     }
