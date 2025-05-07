@@ -55,7 +55,7 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
-    - _Float0: 0.56
+    - _Float0: 1
     - _GridMaskAlpha: 0.29
     - _QueueControl: 0
     - _QueueOffset: 0
