@@ -63,7 +63,7 @@ Material:
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _GridColor: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 0}
-    - _MainColor: {r: 0.6792453, g: 0.6202427, b: 0.52224994, a: 0}
+    - _MainColor: {r: 0.7169812, g: 0.6516896, b: 0.5512638, a: 0}
     - _TilingGrid: {r: 1, g: 1, b: 0, a: 0}
     - _TilingOffsetMask: {r: 0.2, g: 0.2, b: 1, a: 1}
   m_BuildTextureStacks: []
