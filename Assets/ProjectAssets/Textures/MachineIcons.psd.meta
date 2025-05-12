@@ -166,7 +166,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -175,6 +175,28 @@ TextureImporter:
       bones: []
       spriteID: d314507125a58674788cc89c00788f09
       internalID: -692968024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fight
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bee507fc5488d8141a23502ac228df9d
+      internalID: 1463966219
       vertices: []
       indices: 
       edges: []
@@ -193,6 +215,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      Fight: 1463966219
       GeoPoint: 1805814541
       Puzzle: -692968024
   mipmapLimitGroupName: 

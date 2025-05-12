@@ -60,7 +60,7 @@ Material:
     - _SpecularHighlights: 1
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 0}
+    - _MainColor: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0}
     - _Vector0: {r: 0, g: 15, b: 10, a: 0}
     - _outlineColor: {r: 0.6603774, g: 0.5575828, b: 0.5575828, a: 0}
