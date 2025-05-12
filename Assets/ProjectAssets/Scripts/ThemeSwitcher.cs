@@ -17,7 +17,7 @@ public class ThemeSwitcher : MonoBehaviour
 
     void SetActiveGroup(bool enableGroupA)
     {
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(true); // även inaktiva
+        var allObjects = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
 
         foreach (var obj in allObjects)
         {

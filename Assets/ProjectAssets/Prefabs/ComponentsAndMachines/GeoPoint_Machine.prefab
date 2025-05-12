@@ -715,13 +715,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8682875571336839276}
+  - component: {fileID: 6919233391434373594}
+  - component: {fileID: 2815481909292904160}
   m_Layer: 0
   m_Name: GameWorldGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8682875571336839276
 Transform:
   m_ObjectHideFlags: 0
@@ -739,6 +741,40 @@ Transform:
   - {fileID: 3326193367996085718}
   m_Father: {fileID: 7467867644583279587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6919233391434373594
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619173411834758765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.14
+  m_Center: {x: 0, y: 0.06, z: 0}
+--- !u!114 &2815481909292904160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619173411834758765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fc12d45a9e42e4c8b9ff2e197f64f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiPrefab: {fileID: 4130693366467685059, guid: d0cd8099441a0df47876c4e2e359c206, type: 3}
 --- !u!1 &8734938194288729772
 GameObject:
   m_ObjectHideFlags: 0
