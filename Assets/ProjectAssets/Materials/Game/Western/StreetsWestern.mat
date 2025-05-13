@@ -62,10 +62,10 @@ Material:
     - _ReceiveShadows: 1
     - _SpecularHighlights: 1
     m_Colors:
-    - _Blue_Color: {r: 0.7735849, g: 0.6571575, b: 0.53640085, a: 1}
+    - _Blue_Color: {r: 0.8113208, g: 0.62927306, b: 0.4554112, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _GridColor: {r: 1, g: 1, b: 1, a: 0}
-    - _Red_Color: {r: 0.8490566, g: 0.70169103, b: 0.56470275, a: 1}
+    - _Red_Color: {r: 0.8679245, g: 0.72434753, b: 0.5199359, a: 1}
     - _TilingGrid: {r: 1, g: 1, b: 0, a: 0}
     - _TilingOffsetMask: {r: 0.2, g: 0.2, b: 1, a: 1}
   m_BuildTextureStacks: []
