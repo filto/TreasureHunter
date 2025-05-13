@@ -188,7 +188,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -197,6 +197,28 @@ TextureImporter:
       bones: []
       spriteID: bee507fc5488d8141a23502ac228df9d
       internalID: 1463966219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PickupMachine
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01a2f28fd1c870740a04ded8b3c33ec9
+      internalID: 2063453198
       vertices: []
       indices: 
       edges: []
@@ -217,6 +239,7 @@ TextureImporter:
     nameFileIdTable:
       Fight: 1463966219
       GeoPoint: 1805814541
+      PickupMachine: 2063453198
       Puzzle: -692968024
   mipmapLimitGroupName: 
   pSDRemoveMatte: 1
