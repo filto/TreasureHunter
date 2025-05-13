@@ -65,7 +65,7 @@ Material:
     - _Blue_Color: {r: 0.2519135, g: 0.4811321, b: 0.25514194, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _GridColor: {r: 1, g: 1, b: 1, a: 0}
-    - _Red_Color: {r: 0.30940595, g: 0.5471698, b: 0.3019758, a: 1}
+    - _Red_Color: {r: 0.3587444, g: 0.5754717, b: 0.3230242, a: 1}
     - _TilingGrid: {r: 1, g: 1, b: 0, a: 0}
     - _TilingOffsetMask: {r: 0.2, g: 0.2, b: 1, a: 1}
   m_BuildTextureStacks: []
