@@ -1,30 +1,44 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ThemeSwitcher : MonoBehaviour
 {
-    [Header("Namn att växla mellan (måste vara exakt)")]
-    public string groupAName = "GameCity";
-    public string groupBName = "GameWestern";
+    [Tooltip("Lista med teman (alla objekt med samma namn aktiveras när temat väljs)")]
+    public List<string> themeNames = new List<string>();
 
-    private bool usingGroupA = true;
+    private int currentThemeIndex = 0;
 
-    // Kallas från UI-knapp
-    public void ToggleGroup()
+    // Kallas från knapp (nästa tema)
+    public void SwitchToNextTheme()
     {
-        usingGroupA = !usingGroupA;
-        SetActiveGroup(usingGroupA);
+        currentThemeIndex++;
+        if (currentThemeIndex >= themeNames.Count)
+            currentThemeIndex = 0;
+
+        SetActiveTheme(themeNames[currentThemeIndex]);
     }
 
-    void SetActiveGroup(bool enableGroupA)
+    // Kallas för att aktivera ett specifikt tema
+    public void SetActiveTheme(string themeName)
     {
         GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(true); // även inaktiva
 
         foreach (var obj in allObjects)
         {
-            if (obj.name == groupAName)
-                obj.SetActive(enableGroupA);
-            else if (obj.name == groupBName)
-                obj.SetActive(!enableGroupA);
+            if (themeNames.Contains(obj.name))
+            {
+                obj.SetActive(obj.name == themeName);
+            }
         }
+
+        Debug.Log("Aktivt tema: " + themeName);
+    }
+    
+    public void ActivateCurrentTheme()
+    {
+        if (currentThemeIndex >= themeNames.Count)
+            currentThemeIndex = 0;
+
+        SetActiveTheme(themeNames[currentThemeIndex]);
     }
 }
