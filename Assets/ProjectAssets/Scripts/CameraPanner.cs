@@ -76,7 +76,7 @@ public class CameraPanner : MonoBehaviour
                 float currDistance = (t1.position - t2.position).magnitude;
                 float zoomDelta = (currDistance - prevDistance) * zoomSpeed;
 
-                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - zoomDelta, 2f, 20f);
+                cam.fieldOfView = Mathf.Clamp(cam.fieldOfView - zoomDelta, minZoom, maxZoom);
             }
         }
         
@@ -116,8 +116,8 @@ public class CameraPanner : MonoBehaviour
             Vector2 currentMousePos = Input.mousePosition;
             float deltaY = currentMousePos.y - lastMousePos.y;
 
-            cam.orthographicSize = Mathf.Clamp(
-                cam.orthographicSize - deltaY * scrollZoomSpeed * 0.01f,
+            cam.fieldOfView = Mathf.Clamp(
+                cam.fieldOfView - deltaY * scrollZoomSpeed * 0.01f,
                 minZoom,
                 maxZoom
             );
