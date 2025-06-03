@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class SimplePlayerMovement : MonoBehaviour
 {
-    public Camera cam; // Dra in kameran här
+    public Camera cam;
     public float speed = 5f;
     public float rotationSpeed = 8f;
+
+    public Joystick joystick; // ← Dra in din joystick här i Inspector
 
     void Awake()
     {
@@ -14,10 +16,11 @@ public class SimplePlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // Använd joystickens input istället för tangentbord
+        Vector2 input = joystick.Direction;
+
         if (input.sqrMagnitude < 0.01f) return;
 
-        // 1. Beräkna rörelseriktning i kamerans space
         Vector3 camForward = cam.transform.forward;
         Vector3 camRight = cam.transform.right;
         camForward.y = 0f;
@@ -25,11 +28,9 @@ public class SimplePlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = (camForward * input.y + camRight * input.x).normalized;
 
-        // 2. Rotera spelaren mot rörelseriktningen
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
 
-        // 3. Flytta spelaren framåt
         transform.position += moveDirection * speed * input.magnitude * Time.deltaTime;
     }
 }
