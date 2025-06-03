@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class SimplePlayerMovement : MonoBehaviour
 {
-    public InputActionReference moveAction;
     public Camera cam; // Dra in kameran här
     public float speed = 5f;
     public float rotationSpeed = 8f;
@@ -14,19 +12,9 @@ public class SimplePlayerMovement : MonoBehaviour
             cam = Camera.main;
     }
 
-    void OnEnable()
-    {
-        moveAction.action.Enable();
-    }
-
-    void OnDisable()
-    {
-        moveAction.action.Disable();
-    }
-
     void Update()
     {
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (input.sqrMagnitude < 0.01f) return;
 
         // 1. Beräkna rörelseriktning i kamerans space
