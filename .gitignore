@@ -38,3 +38,14 @@ Thumbs.db
 *.apk
 *.aar
 *.unitypackage
+
+# CMake och Unity build-grejer
+.utmp/
+Debug/
+CMakeFiles/
+*.cmake
+*.o
+*.bin
+*.json
+*.log
+*.tmp
