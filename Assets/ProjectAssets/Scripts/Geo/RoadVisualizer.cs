@@ -6,6 +6,9 @@ public class RoadVisualizer : MonoBehaviour
 {
     public OSMDownloader downloader;
     public RoadRendererSettings roadSettings;
+    public float weldThreshold = 0.2f;
+    public float lengthTolerance = 0.5f;
+    public float directionThreshold = 0.9f;
 
     private Dictionary<long, Vector2> nodeDict = new();
     private Dictionary<string, MeshBuilder> meshBuilders = new();
@@ -70,7 +73,12 @@ public class RoadVisualizer : MonoBehaviour
         foreach (var pair in meshBuilders)
         {
             var finalRule = roadSettings.GetRuleFor(pair.Key) ?? roadSettings.defaultRule;
+            pair.Value.DebugDrawMidpoints(); 
+            pair.Value.WeldEdges(weldThreshold,lengthTolerance,directionThreshold);
             var mesh = pair.Value.BuildMesh();
+            
+            /*// 🔧 Svetsa ihop vertices innan den används
+            MeshUtils.WeldVerticesByThreshold(mesh, weldThreshold);*/
 
             GameObject go = new GameObject($"Road_{pair.Key}");
             var mf = go.AddComponent<MeshFilter>();

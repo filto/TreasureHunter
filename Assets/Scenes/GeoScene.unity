@@ -802,6 +802,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downloader: {fileID: 1230001091}
   roadSettings: {fileID: 911971140}
+  weldThreshold: 0.2
+  lengthTolerance: 0.5
+  directionThreshold: 0.2
 --- !u!4 &1230001093
 Transform:
   m_ObjectHideFlags: 0
