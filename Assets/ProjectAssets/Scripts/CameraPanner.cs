@@ -152,6 +152,7 @@ public class CameraPanner : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
+            Debug.Log(hit.point);
             return hit.point;
         }
         

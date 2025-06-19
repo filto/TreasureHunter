@@ -9,6 +9,8 @@ public class RoadVisualizer : MonoBehaviour
     public float weldThreshold = 0.2f;
     public float lengthTolerance = 0.5f;
     public float directionThreshold = 0.9f;
+    public Material outlineMaterial;
+    public float offsetWidth = 0.2f;
 
     private Dictionary<long, Vector2> nodeDict = new();
     private Dictionary<string, MeshBuilder> meshBuilders = new();
@@ -55,7 +57,6 @@ public class RoadVisualizer : MonoBehaviour
                 material = baseRule.material,
                 width = baseRule.width
             };
-
             
 
             // Fortsätt med vanlig väg
@@ -66,14 +67,13 @@ public class RoadVisualizer : MonoBehaviour
             }
 
             AddRoadToBuilder(el.nodes, builder);
-            
         }
 
         // Skapa mesh per vägtyp
         foreach (var pair in meshBuilders)
         {
             var finalRule = roadSettings.GetRuleFor(pair.Key) ?? roadSettings.defaultRule;
-            pair.Value.DebugDrawMidpoints(); 
+            //pair.Value.DebugDrawMidpoints(); 
             pair.Value.WeldEdges(weldThreshold,lengthTolerance,directionThreshold);
             var mesh = pair.Value.BuildMesh();
             

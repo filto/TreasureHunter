@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1999
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -55,16 +55,17 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
-    - _GridMaskAlpha: 0.67
+    - _GridMaskAlpha: 0.222
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: -1
     - _ReceiveShadows: 1
     - _SpecularHighlights: 1
     m_Colors:
+    - _Color0: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GridColor: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 0}
-    - _MainColor: {r: 0.7169812, g: 0.6516896, b: 0.5512638, a: 0}
-    - _TilingGrid: {r: 1, g: 1, b: 0, a: 0}
-    - _TilingOffsetMask: {r: 0.2, g: 0.2, b: 1, a: 1}
+    - _GridColor: {r: 1, g: 1, b: 1, a: 0}
+    - _MainColor: {r: 0.7735849, g: 0.69050074, b: 0.5728907, a: 0}
+    - _TilingGrid: {r: 0.4, g: 0.4, b: 0, a: 0}
+    - _TilingOffsetMask: {r: 0.04, g: 0.04, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

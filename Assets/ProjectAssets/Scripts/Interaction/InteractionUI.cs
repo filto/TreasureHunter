@@ -73,7 +73,7 @@ public class InteractionUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Vector3 worldPos = Vector3.zero;
 
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 2000f))
         {
             hitObject = hit.collider.gameObject;
             worldPos = hit.point;

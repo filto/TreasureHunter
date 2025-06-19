@@ -6,6 +6,7 @@ public class InteractionManager : MonoBehaviour
 {
     public static InteractionManager Instance; // 🔹 Singleton, så vi har bara en
     GameObject activeObject = null;
+    public Camera raycastCamera;
     
     private void Awake()
     {
@@ -19,15 +20,17 @@ public class InteractionManager : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
             
-            Ray worldRay = Camera.main.ScreenPointToRay(touch.position);
+            Ray worldRay = raycastCamera.ScreenPointToRay(touch.position);
             RaycastHit hitRay;
             GameObject hitObject = null;
             Vector3 worldPosition = Vector3.zero;
             
-            if (Physics.Raycast(worldRay, out hitRay, 100f))
+            if (Physics.Raycast(worldRay, out hitRay, 2000f))
             {
                 hitObject  = hitRay.collider.gameObject;
                 worldPosition = hitRay.point;
+                //Debug.Log(hitObject.name);
+                //Debug.Log(worldPosition);
             }
 
             if (hitObject == null) return;
