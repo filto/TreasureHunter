@@ -3,28 +3,26 @@ using UnityEngine;
 public class PositionToGPS : MonoBehaviour
 {
     private Vector3 lastPosition;
+    public float updateInterval = 2f;
+    private float timeSinceLastUpdate = 0f;
+    public float moveDistance = 0.001f;
 
     void Start()
     {
-        lastPosition = transform.position;
     }
 
     void LateUpdate()
     {
-        if (transform.position != lastPosition)
-        {
-            Vector2 newLatLon = GeoUtils.PositionToGPS(transform.position);
-
-            if (GPSManager.Instance.gpsMarker != null)
+            timeSinceLastUpdate += Time.deltaTime;
+            if (timeSinceLastUpdate >= updateInterval)
             {
-                GPSManager.Instance.gpsMarker.latitude = newLatLon.x;
-                GPSManager.Instance.gpsMarker.longitude = newLatLon.y;
+
+                if (GPSManager.Instance.gpsMarker != null)
+                {
+                    GPSManager.Instance.gpsMarker.latitude += moveDistance;
+                    //GPSManager.Instance.gpsMarker.longitude = newLatLon.y;
+                }
+                timeSinceLastUpdate = 0f;
             }
-
-            // Flytta tillbaka objektet till origo
-            transform.position = Vector3.zero;
-
-            lastPosition = Vector3.zero; // viktigt, så vi inte detekterar rörelse nästa frame igen
-        }
     }
 }

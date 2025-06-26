@@ -5,13 +5,23 @@ using UnityEngine.EventSystems;
 public class InteractionManager : MonoBehaviour
 {
     public static InteractionManager Instance; // 🔹 Singleton, så vi har bara en
-    GameObject activeObject = null;
+    public GameObject activeObject = null;
     public Camera raycastCamera;
     
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+    
+    void OnEnable()
+    {
+        activeObject = null;
+    }
+    
+    public void ResetInteraction()
+    {
+        activeObject = null;
     }
 
     void Update()
@@ -29,8 +39,6 @@ public class InteractionManager : MonoBehaviour
             {
                 hitObject  = hitRay.collider.gameObject;
                 worldPosition = hitRay.point;
-                //Debug.Log(hitObject.name);
-                //Debug.Log(worldPosition);
             }
 
             if (hitObject == null) return;
@@ -48,7 +56,7 @@ public class InteractionManager : MonoBehaviour
                 if (activeObject != null)
                 {
                     var interaction = activeObject.GetComponent<Interaction>();
-                    interaction?.Initialize(); // Säkerställer återställning
+                    interaction?.Initialize(); 
                 }
 
                 activeObject = hitObject;

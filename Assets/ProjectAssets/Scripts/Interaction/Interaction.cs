@@ -62,7 +62,11 @@ public class Interaction : MonoBehaviour
                 {
                     if (is2DMovement)
                     {
-                        interactionObject.transform.position = new Vector3(touchData.worldPosition.x, startPosition.y, touchData.worldPosition.z) + midPointOffset;  
+                        Vector3 touchDelta = touchData.worldPosition - touchStartPosition;
+                        interactionObject.transform.position = startPosition + new Vector3(touchDelta.x, 0f, touchDelta.z);
+                        
+                        /*interactionObject.transform.position = new Vector3(touchData.worldPosition.x, startPosition.y, touchData.worldPosition.z) + midPointOffset; 
+                        Debug.Log(touchData.worldPosition);*/
                     }
                     else
                     interactionObject.transform.position = touchData.worldPosition + midPointOffset;

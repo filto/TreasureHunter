@@ -6,9 +6,11 @@ public class GPSManager : MonoBehaviour
     
     public GPSMarker gpsMarker;
     public GameObject mapParent;
+    public float heading = 0;
+    public float speed = 0;
 
-    public float referenceLatitude => gpsMarker != null ? gpsMarker.latitude : 0f;
-    public float referenceLongitude => gpsMarker != null ? gpsMarker.longitude : 0f;
+    public float referenceLatitude;
+    public float referenceLongitude;
     public float worldScale = 100000f;
 
     private void Awake()
@@ -19,6 +21,17 @@ public class GPSManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void Start()
+    {
+        SetReferencePoint();
+    }
+
+    public void SetReferencePoint()
+    {
+        referenceLatitude = gpsMarker.latitude;
+        referenceLongitude = gpsMarker.longitude;
     }
     
 }

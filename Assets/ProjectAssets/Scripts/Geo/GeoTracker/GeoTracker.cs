@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using TMPro; // ← TextMeshPro namespace
+using TMPro; 
 using UnityEngine.Android;
 
 public class GeoTracker : MonoBehaviour
@@ -26,7 +26,7 @@ public class GeoTracker : MonoBehaviour
         }
 #endif
 
-        Input.location.Start();
+        Input.location.Start(5f,1f);
 
         int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)

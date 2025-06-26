@@ -24,7 +24,7 @@ public class SwitchEditorGame : MonoBehaviour
                 editorModeObjects[i].SetActive(false);
         }
         
-        //themeSwitcher.ActivateCurrentTheme();
+        themeSwitcher.ActivateCurrentTheme();
         
         CurrentModeIsGame = true;
         OnModeChanged?.Invoke(true);

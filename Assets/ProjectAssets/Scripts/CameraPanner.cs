@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraPanner : MonoBehaviour
 {
     public Camera cam;
-    public Collider mapCollider; // Dra in 3D-collider i inspector
+    public Collider mapCollider; 
 
     private Vector3 startWorldPosition;
     private float zoomSpeed = 0.01f;
@@ -12,18 +12,30 @@ public class CameraPanner : MonoBehaviour
     public float speedZ = 1;
     private Vector2 lastTouchPos;
     private Vector3 inertia = Vector3.zero;
-    public float inertiaDamp = 0.9f;  // 0.9 → långsam broms, 0.5 → snabbare
-    public float inertiaThreshold = 0.01f; // under detta → stopp
+    public float inertiaDamp = 0.9f;  
+    public float inertiaThreshold = 0.01f; 
     public float minZoom = 2f;
     public float maxZoom = 20f;
     
-    private float doubleClickTime = 0.25f; // Max tid mellan klick för att räknas som dubbelklick
+    private float doubleClickTime = 0.25f; 
     private float lastClickTime = -1f;
     private bool zoomMode = false;
     private Vector2 lastMousePos;
     private bool isActive = false;
         
 
+    void OnEnable()
+    {
+        isActive = false;
+        inertia = Vector3.zero;
+        
+        if (InteractionManager.Instance != null)
+        {
+            InteractionManager.Instance.gameObject.SetActive(false);
+            InteractionManager.Instance.gameObject.SetActive(true);
+        }
+        
+    }
     void Update()
     {
         if (Input.touchCount == 1 && !zoomMode)
@@ -54,12 +66,11 @@ public class CameraPanner : MonoBehaviour
 
                 Vector3 delta = worldA - worldB;
                 transform.position += new Vector3(delta.x * speedX, 0f, delta.z * speedZ);
-
-                //Debug.Log($"Delta: {delta}, Pos: {transform.position}");
+                
                 
                 inertia = delta / Time.deltaTime;
 
-                lastTouchPos = touch.position; // bara screen-coord!
+                lastTouchPos = touch.position; 
                 
             }
             
@@ -88,10 +99,7 @@ public class CameraPanner : MonoBehaviour
                 inertia.z * speedZ * Time.deltaTime
             );
 
-            inertia *= inertiaDamp; // bromsa in
-
-            // Debug
-            //Debug.Log($"Inertia: {inertia}");
+            inertia *= inertiaDamp; 
         }
         
         
@@ -152,7 +160,6 @@ public class CameraPanner : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Debug.Log(hit.point);
             return hit.point;
         }
         
