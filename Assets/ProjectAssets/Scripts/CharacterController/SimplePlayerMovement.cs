@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SimplePlayerMovement : MonoBehaviour
@@ -6,11 +7,22 @@ public class SimplePlayerMovement : MonoBehaviour
     public float speed = 5f;
     public float rotationSpeed = 8f;
     public Joystick joystick;
+    private Vector3 startPoint;
 
     void Awake()
     {
         if (cam == null)
             cam = Camera.main;
+    }
+
+    private void OnEnable()
+    {
+        startPoint = GPSManager.Instance.mapParent.transform.position;
+    }
+
+    private void OnDisable()
+    {
+        GPSManager.Instance.mapParent.transform.position=startPoint;
     }
 
     void Update()
