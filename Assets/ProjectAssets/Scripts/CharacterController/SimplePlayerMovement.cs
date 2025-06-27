@@ -25,13 +25,10 @@ public class SimplePlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = (camForward * input.y + camRight * input.x).normalized;
 
-        if (moveDirection.sqrMagnitude > 0.001f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        }
+        //Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         
-        //GPSManager.Instance.mapParent.transform.position -= (moveDirection*Time.deltaTime*speed);
+        GPSManager.Instance.mapParent.transform.position -= (moveDirection*Time.deltaTime*speed);
         
     }
 }
