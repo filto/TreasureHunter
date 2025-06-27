@@ -90,7 +90,7 @@ public class MapPositioner : MonoBehaviour
 
         Vector3 currentPosition = transform.position;
         Vector3 newPosition = Vector3.Lerp(currentPosition, targetWorldPosition, t);
-        transform.position = newPosition;
+        GPSManager.Instance.mapParent.transform.position = newPosition;
 
         if (t >= 1f)
         {
@@ -111,7 +111,7 @@ public class MapPositioner : MonoBehaviour
         simulatedOffset += direction * speed * baseSpeed * Time.deltaTime;
 
         // Lägg till simulering ovanpå GPS-position
-        transform.position = OffsetFromGPS(lastGPSPosition) - simulatedOffset;
+        GPSManager.Instance.mapParent.transform.position = OffsetFromGPS(lastGPSPosition) - simulatedOffset;
     }
     
     float GetMotionStrength()
