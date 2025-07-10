@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GeoScene.unity
     guid: af3edbeb8623ea34da421cf7fe2344fe
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Editor.unity
     guid: c7a4fd167325b6e4eb3b4936a6e8d457
+  - enabled: 1
+    path: Assets/Scenes/mediaPlugin.unity
+    guid: 229733c767918c346b977917d3ddd68e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
